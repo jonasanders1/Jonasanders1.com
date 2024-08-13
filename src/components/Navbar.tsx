@@ -16,19 +16,19 @@ const Navbar = () => {
         } `}
       >
         <li>
-          <a href="#">
+          <a href="#hero" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-rounded">home</span>
             Home
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="#education" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-rounded">school</span>
             Education
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="#projects" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-rounded">done_all</span>
             Projects
           </a>
@@ -43,19 +43,13 @@ const Navbar = () => {
 
         <ul className={`desktop-menu `}>
           <li>
-            <a href="#">Home</a>
+            <a href="#hero">Home</a>
           </li>
           <li>
-            <a href="#">Education</a>
+            <a href="#education">Education</a>
           </li>
           <li>
-            <a href="#">Projects</a>
-          </li>
-          <li>
-            <a href="#">Projects</a>
-          </li>
-          <li>
-            <a href="#">Projects</a>
+            <a href="#projects">Projects</a>
           </li>
         </ul>
 

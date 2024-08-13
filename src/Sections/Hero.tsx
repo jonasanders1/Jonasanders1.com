@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section>
+    <section id="hero">
       <h3>Hero</h3>
     </section>
   );

@@ -2,13 +2,42 @@
 
 :root {
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
   --max-width: 1200px;
+  --nav-height: 60px;
+
+  /** BACKGRoUND COLOR **/
+  --dark-background-clr: #333;
+  --light-background-clr: #eaeaea;
+  /** TEXT COLOR **/
+  --light-text-clr: #333;
+  --dark-text-clr: #eaeaea;
+  /** Nav Colors **/
+
+  color: var(--dark-text-clr);
+  background-color: var(--dark-background-clr);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--light-text-clr);
+    background-color: var(--light-background-clr);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--dark-text-clr);
+    background-color: var(--dark-background-clr);
+  }
+  nav {
+    background-color: #4e4e4e;
+    color: white;
+  }
 }
 
 /* CSS Reset */
@@ -26,7 +55,9 @@ body {
   margin: 0;
   padding: 0;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 /* Set default font size and family */
 body {
   font-family: "Montserrat", sans-serif;
@@ -96,4 +127,32 @@ fieldset {
 p {
   margin: 0;
   padding: 0;
+}
+
+/**  APP - LAYOUT  **/
+section {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max-width);
+  height: 600px;
+  border: 1px solid gray;
+  padding-top: 6rem;
+}
+
+section:last-child {
+  margin-bottom: var(--nav-height);
+}
+
+/* Media Queries */
+@media screen and (max-width: 700px) {
+  section {
+    padding: 0rem 1rem;
+    padding-top: 3rem;
+  }
+  nav {
+    padding: 0rem 1rem;
+  }
+  section:last-child {
+    margin-bottom: calc(var(--nav-height) + 5rem);
+  }
 }
