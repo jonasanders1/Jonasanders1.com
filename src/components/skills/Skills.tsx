@@ -1,6 +1,6 @@
 import SkillsBox from "./SkillsBox";
-import { skillsData } from "./skillsData"; 
-import './Skills.css'
+import { skillsData } from "./skillsData";
+import "./skills.css";
 
 const Skills = () => {
   return (
