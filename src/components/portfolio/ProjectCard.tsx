@@ -5,19 +5,7 @@ import Images from "./Images";
 import Footer from "./Footer";
 import Description from "./Description";
 
-interface ProjectItem {
-  id: number;
-  name: string;
-  image: {
-    projectImage: string[]
-  };
-  description: string;
-  githubLink: string;
-  previewLink: string;
-  icon: string;
-  language: string
-  color: string
-}
+import { ProjectItem } from "../../types";
 
 
 const ProjectCard: React.FC<{item : ProjectItem}> = ({item}) => {

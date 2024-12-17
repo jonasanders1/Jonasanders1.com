@@ -13,13 +13,13 @@ const Header = () => {
   });
 
   /* ============== Menu Toggle ============== */
-  const [isShowing, setIsShowing] = useState<Boolean>(false);
+  const [isShowing, setIsShowing] = useState<boolean>(false);
   const [activeNav, setActiveNav] = useState<string>("#home");
   return (
     <header className="header">
       <nav className="nav container">
         <a href="index.html" className="nav__logo">
-          Jonas Andersen
+          <img src="/src/assets/logo.png" width={30} alt="logo" />
         </a>
 
         <div className={isShowing ? "nav__menu show-menu" : "nav__menu"}>

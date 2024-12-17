@@ -1,10 +1,7 @@
-// import Backend from "./Backend";
-// import Frontend from "./Frontend";
 
-// import "./skills.css";
+import "./Skills.css";
 import SkillsBox from "./SkillsBox";
 import skillsJSON from "./skills.json";
-import "./SkillsBox.css";
 
 type Skill = {
   skill_title: string;

@@ -1,9 +1,5 @@
 import React from "react";
-
-interface FooterProps {
-  previewLink: string;
-  githubLink: string;
-}
+import { FooterProps } from "../../types";
 
 const Footer: React.FC<FooterProps> = ({ previewLink, githubLink }) => {
   return (
