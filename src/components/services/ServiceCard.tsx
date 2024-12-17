@@ -5,7 +5,15 @@ const ServiceCard = ({ service, isActive, onToggle }: ServiceCardProps) => {
     <div className="services__content">
       <div>
         <i className={`${service.icon} services__icon`}></i>
-        <h3 className="services__title">{service.title}</h3>
+        <h3 className="services__title">
+          {service.title.split(" ").length === 2 ? (
+            <>
+              {service.title.split(" ")[0]} <br /> {service.title.split(" ")[1]}
+            </>
+          ) : (
+            service.title
+          )}
+        </h3>
       </div>
 
       <span className="services__button" onClick={() => onToggle(service.id)}>

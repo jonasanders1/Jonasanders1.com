@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./header.css";
-
+import logo from "../../assets/logo-rounded.png";
+// import ThemeToggle from "./ThemeToggle";
 const Header = () => {
   /* ============== Change Background Header ============== */
   window.addEventListener("scroll", function () {
@@ -19,7 +20,7 @@ const Header = () => {
     <header className="header">
       <nav className="nav container">
         <a href="index.html" className="nav__logo">
-          <img src="/src/assets/logo.png" width={30} alt="logo" />
+          <img src={logo} width={30} alt="logo" />
         </a>
 
         <div className={isShowing ? "nav__menu show-menu" : "nav__menu"}>
