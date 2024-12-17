@@ -8,10 +8,10 @@ const SkillsBox: React.FC<SkillsBoxProps> = ({ title, skills }) => {
       <div className="skills__flex">
         {skills.map((skill, index) => (
           <div className="skills__data" key={index}>
-            <i className={`bx bxl-${skill.skill_icon} skills__data-icon`}></i>
+            <i className={`bx bxl-${skill.skillIcon} skills__data-icon`}></i>
             <div>
-              <h3 className="skills__name">{skill.skill_title}</h3>
-              <span className="skills__level">{skill.skill_level}</span>
+              <h3 className="skills__name">{skill.skillTitle}</h3>
+              <span className="skills__level">{skill.skillLevel}</span>
             </div>
           </div>
         ))}

@@ -48,14 +48,14 @@ export interface ProjectItem {
   color: string;
 }
 
-export interface Skill {
-  skill_title: string;
-  skill_level: string;
-  skill_icon: string;
-}
+type Skill = {
+  skillTitle: string;
+  skillLevel: string;
+  skillIcon: string;
+};
 
 export interface SkillsBoxProps {
-  title: string; 
+  title: string;
   skills: Skill[];
 }
 
