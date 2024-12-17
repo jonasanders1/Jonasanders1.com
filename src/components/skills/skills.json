@@ -1,0 +1,149 @@
+[
+  {
+    "Frontend": [
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "JavaScript",
+        "skill_level": "Intermediate",
+        "skill_icon": "javascript"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      },
+      {
+        "skill_title": "CSS",
+        "skill_level": "Advanced",
+        "skill_icon": "css3"
+      }
+    ]
+  },
+  {
+    "Backend": [
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      }
+    ]
+  },
+  {
+    "Backend": [
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      },
+      {
+        "skill_title": "HTML",
+        "skill_level": "Basic",
+        "skill_icon": "html5"
+      }
+    ]
+  }
+]

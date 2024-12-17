@@ -1,0 +1,239 @@
+.portfolio{
+
+}
+.portfolio__title{
+
+}
+.portfolio__subtitle{
+
+}
+.portfolio__container{
+
+}
+.filter__container{
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 2rem;
+
+}
+.filter__button {
+    position: relative;
+    color: var(--title-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-normal);
+    background-color: var(--font-color);
+}
+.filter__button::after{
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
+    width: 0%;
+    border-radius: 10px;
+    height: 3px;
+    background-color: rgb(244, 79, 79);
+}
+
+.active::after{
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
+    width: 100%;
+    border-radius: 10px;
+    height: 3px;
+    background-color: rgb(244, 79, 79);
+}
+
+.filter__button:hover::after{
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
+    width: 100%;
+    border-radius: 10px;
+    height: 3px;
+    background-color: rgb(244, 79, 79);
+    transition: all 250ms;
+}
+
+
+.projects {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+/* ****** PROJECT CARD ****** */
+.project__card {
+    background-color: var(--container-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    height: 420px;
+    position: relative;
+}
+.project__content{
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.header__container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.programming__language{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.project__image{
+  width: 100%;
+  object-fit: cover;
+  height: 150px;
+  border-radius: 10px;
+}
+
+
+.project__header{
+  text-align: center;
+}
+.project__header *{
+  color: rgb(0, 0, 0);
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+.project__main{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.project__main-image{
+  object-fit: cover;
+}
+.project__description{
+  max-height: 100px;  
+  position: relative;
+}
+.modal{
+  z-index: 10;
+  position: absolute;
+  inset: 0;
+  background-color: rgb(255, 255, 255);
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+.active{
+  opacity: 1;
+}
+
+.modal-content{
+  padding: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-direction: column;
+  transition: all 200ms ease-in;
+}
+.read-more__button{
+  font-size: .75rem;
+  color: rgb(58, 58, 58);
+  text-decoration: underline;
+  background-color: inherit;
+  transition: all 200ms;
+}
+
+
+
+.read-more__button:hover{
+  color: rgb(244, 79, 79);
+}
+.close-icon {
+  font-size: 1.5rem;
+}
+.close-icon:hover{
+  color: rgb(244, 79, 79);
+}
+.project__footer{
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 1.25rem 1.25rem;
+  padding: 1rem;
+}
+
+.project__button {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  gap: 5px;
+  padding: .3rem .5rem;
+  border-radius: .5rem;
+  border: 1px solid rgb(244, 79, 79);
+  color: rgb(244, 79, 79);
+}
+
+.disabled__button{
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  gap: 5px;
+  padding: .3rem .5rem;
+  border-radius: .5rem;
+  border: 1px solid rgb(167, 167, 167);
+  color: rgb(139, 139, 139);
+
+}
+.disabled__button span{
+  text-decoration: line-through;
+}
+.project__button > * {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.project__button:hover {
+  color: white;
+  background-color: rgb(244, 79, 79);
+  transition: all 250ms;
+}
+
+.project__button-icon{
+  font-size: 1.35rem;
+}
+
+
+/* For medium devices */
+@media screen and (max-width: 800px) {
+  .projects{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .projects{
+    grid-template-columns: repeat(1, 1fr);
+  }
+ 
+
+}
+
+/* For small devices */
+@media screen and (max-width: 420px) {
+  .filter__button{
+    font-size: .7rem;
+  }
+
+}
