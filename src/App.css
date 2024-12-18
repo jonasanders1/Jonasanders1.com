@@ -13,6 +13,7 @@
   --title-color-dark: hsl(var(--hue), var(--sat), 0%);
   --text-color: hsl(var(--hue), var(--sat), 46%);
   --body-color: hsl(var(--hue), var(--sat), 98%);
+  /* --body-color: red; */
   --container-color: #fff;
 
   
@@ -83,10 +84,6 @@ textarea {
   font-size: var(--normal-font-size);
 }
 
-body {
-  background-color: var(--body-color);
-  color: var(--text-color);
-}
 
 h1,
 h2,
@@ -119,21 +116,7 @@ img {
   padding: 6rem 0 2rem;
 }
 
-.section__title {
-  font-size: var(--h1-font-size);
-  color: var(--title-color);
-}
 
-.section__subtitle {
-  display: block;
-  font-size: var(--small-font-size);
-  margin-bottom: 4rem;
-}
-
-.section__title,
-.section__subtitle {
-  text-align: center;
-}
 
 /*=============== LAYOUT ===============*/
 .container {
@@ -147,28 +130,6 @@ img {
   gap: 1.5rem;
 }
 
-/*=============== BUTTONS ===============*/
-.button {
-  display: inline-block;
-  background-color: var(--title-color);
-  color: var(--container-color);
-  padding: 1.25rem 2rem;
-  border-radius: 1rem;
-  font-weight: var(--font-medium);
-}
-
-.button:hover {
-  background-color: var(--title-color-dark);
-}
-
-.button__icon {
-  margin-left: var(--mb-0-5);
-}
-  
-.button--flex {
-  display: inline-flex;
-  align-items: center;
-}
 
 
 /*=============== BREAKPOINTS ===============*/

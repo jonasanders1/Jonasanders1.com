@@ -1,12 +1,12 @@
 import SkillsBox from "./SkillsBox";
 import { skillsData } from "./skillsData";
 import "./skills.css";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 const Skills = () => {
   return (
     <section className="skills section" id="skills">
-      <h2 className="section__title">Skills</h2>
-      <span className="section__subtitle">My technical level</span>
+      <SectionTitle title="Skills" subtitle="My technical level" />
 
       <div className="skills__container container grid">
         {skillsData.map((category, index) => (

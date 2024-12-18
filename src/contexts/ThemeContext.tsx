@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import themes from "../styles/theme";
 
@@ -15,7 +10,9 @@ export type ThemeContextType = {
   themeName: "light" | "dark";
 };
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,

@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+  padding: 1.25rem 2rem;
+  border-radius: 1rem;
+  font-weight: var(--font-medium);
+}
+
+
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.button--flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {
+  .button {
+    padding: 1rem 1.75rem;
+  }
+
+  .button__icon {
+    width: 22px;
+    height: 22px;
+  }
+}

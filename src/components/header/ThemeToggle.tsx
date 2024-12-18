@@ -1,24 +1,23 @@
 import "./themeToggle.css";
-// import { useTheme } from "../../contexts/ThemeContext";
-interface ThemeToggleProps {
-  toggleTheme: () => void;
-}
+import { useTheme } from "../../hooks/useTheme";
+// interface ThemeToggleProps {
+//   toggleTheme: () => void;
+// }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ toggleTheme }) => {
-  // const { themeName, theme } = useTheme();
+const ThemeToggle = () => {
+  const { themeName, toggleTheme } = useTheme();
 
   return (
     <button
-      // className={
-      //   themeName === "dark" ? "switch-container dark-mode" : "switch-container"
-      // }
-      className="switch-container nav__item"
-      // style={{ backgroundColor: theme.primary }}
-      onClick={toggleTheme}
+      className={
+        themeName === "dark"
+          ? "switch-container dark-mode nav__item"
+          : "switch-container nav__item"
+      }
+      onClick={() => toggleTheme()}
     >
       <div
-        // className={themeName === "dark" ? "switch dark-mode" : "switch"}
-        className="switch"
+        className={themeName === "dark" ? "switch dark-mode" : "switch"}
       ></div>
     </button>
   );

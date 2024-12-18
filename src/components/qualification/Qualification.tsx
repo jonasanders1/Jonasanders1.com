@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./qualification.css";
 import { qualificationData } from "./qualificationData";
 import { QualificationItem } from "../../types";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 const Qualification = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -39,8 +40,7 @@ const Qualification = () => {
 
   return (
     <section className="qualification section">
-      <h2 className="section__title">Qualification</h2>
-      <span className="section__subtitle">My personal journey</span>
+      <SectionTitle title="Qualification" subtitle="My personal journey" />
 
       <div className="qualification__container container">
         <div className="qualification__tabs">

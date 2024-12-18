@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./header.css";
 import logo from "../../assets/logo-rounded.png";
+// import { useTheme } from "../../hooks/useTheme";
+import ThemeToggle from "./ThemeToggle";
 // import ThemeToggle from "./ThemeToggle";
 const Header = () => {
   /* ============== Change Background Header ============== */
@@ -12,6 +14,8 @@ const Header = () => {
       header?.classList.remove("scroll-header");
     }
   });
+
+  // const { toggleTheme } = useTheme();
 
   /* ============== Menu Toggle ============== */
   const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -109,6 +113,10 @@ const Header = () => {
                 <i className="uil uil-message nav__icon"></i>
                 Contact
               </a>
+            </li>
+            <li className="nav__item">
+              
+              <ThemeToggle />
             </li>
           </ul>
           <i

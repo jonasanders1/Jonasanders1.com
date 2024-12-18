@@ -1,24 +1,21 @@
 .switch-container {
-  height: 100%;
-  aspect-ratio: 2/1;
-  border-radius: 2rem;
   display: flex;
   align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: gray;
+  height: 20px;
+  aspect-ratio: 2/1;
+  border-radius: 2rem;
   position: relative;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 .switch {
-  position: absolute;
-  left: 3px;
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: white;
   transition: all 0.3s ease;
+  transform: translate(3px, 0.3px);
 }
 
 .switch-container.dark-mode .switch {
-  left: calc(100% - 15px - 3px);
+  transform: translate(22px, 0.3px);
 }

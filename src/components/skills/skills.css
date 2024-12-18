@@ -8,10 +8,10 @@
 .skills__content {
   flex: 1;
   min-width: 300px;
-  background-color: var(--container-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2rem 1rem;
   border-radius: 1.25rem;
+  transition: background-color 0.3s;
 }
 
 .skills__title {
@@ -19,6 +19,7 @@
   font-weight: var(--font-medium);
   text-align: center;
   margin-bottom: var(--mb-1-5);
+  transition: color 0.3s;
 }
 
 .skills__flex {
@@ -26,12 +27,6 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
-}
-
-.skills__group {
-  display: grid;
-  align-items: flex-start;
-  row-gap: 1rem;
 }
 
 .skills__data-icon {
@@ -50,13 +45,11 @@
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
   line-height: 18px;
-  white-space: nowrap; /* Add this */
-  text-overflow: ellipsis; /* Add this */
-  overflow: hidden; /* Add this */
-  width: 100%; /* Add this */
+  transition: color 0.3s;
 }
 .skills__level {
   font-size: var(--tiny-font-size);
+  transition: color 0.3s;
 }
 
 /*=============== BREAKPOINTS ===============*/

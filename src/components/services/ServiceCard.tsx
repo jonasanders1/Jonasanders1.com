@@ -1,6 +1,6 @@
 import { ServiceCardProps } from "../../types";
-
 const ServiceCard = ({ service, isActive, onToggle }: ServiceCardProps) => {
+  
   return (
     <div className="services__content">
       <div>
