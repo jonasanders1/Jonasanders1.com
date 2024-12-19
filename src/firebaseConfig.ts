@@ -4,6 +4,9 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth, GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 
+console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
+
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "jonasanders1-com.firebaseapp.com",
