@@ -79,6 +79,7 @@ const Contact = () => {
 
             <CustomButton
               title="Send Message"
+              size="large"
               isLink={false}
               icon={<FontAwesomeIcon icon={faPaperPlane} />}
             />

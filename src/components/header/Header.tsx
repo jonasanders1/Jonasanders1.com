@@ -57,6 +57,21 @@ const Header = () => {
 
             <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
+                href="#projects"
+                onClick={() => setActiveNav("#projects")}
+                className={
+                  activeNav === "#projects"
+                    ? "nav__link active-link"
+                    : "nav__link"
+                }
+              >
+                <i className="uil uil-scenery nav__icon"></i>
+                Projects
+              </a>
+            </li>
+
+            <li className="nav__item" onClick={() => setIsShowing(false)}>
+              <a
                 href="#skills"
                 onClick={() => setActiveNav("#skills")}
                 className={
@@ -72,34 +87,18 @@ const Header = () => {
 
             <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
-                href="#services"
-                onClick={() => setActiveNav("#services")}
+                href="#qualification"
+                onClick={() => setActiveNav("#qualification")}
                 className={
-                  activeNav === "#services"
+                  activeNav === "#qualification"
                     ? "nav__link active-link"
                     : "nav__link"
                 }
               >
                 <i className="uil uil-briefcase-alt nav__icon"></i>
-                Services
+                Qualification
               </a>
             </li>
-
-            <li className="nav__item" onClick={() => setIsShowing(false)}>
-              <a
-                href="#portfolio"
-                onClick={() => setActiveNav("#portfolio")}
-                className={
-                  activeNav === "#portfolio"
-                    ? "nav__link active-link"
-                    : "nav__link"
-                }
-              >
-                <i className="uil uil-scenery nav__icon"></i>
-                Portfolio
-              </a>
-            </li>
-
             <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
                 href="#contact"

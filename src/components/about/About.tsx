@@ -22,6 +22,7 @@ const About = () => {
 
           <CustomButton
             title="Review my CV"
+            size="large"
             isLink={false}
             onClick={() => window.open(CV, "_blank")}
             icon={<FontAwesomeIcon icon={faFileLines} />}

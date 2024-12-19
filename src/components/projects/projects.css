@@ -1,0 +1,106 @@
+.projects__container {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.project__card {
+  min-width: 280px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 1.25rem;
+}
+
+.project__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: var(--mb-1);
+}
+
+.project__icon {
+  font-size: var(--h2-font-size);
+}
+
+.project__title {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+}
+
+.project__description {
+  font-size: var(--small-font-size);
+  margin-bottom: var(--mb-1);
+}
+
+.project__technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--mb-1);
+}
+.project__technology {
+  font-size: var(--small-font-size);
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.5rem;
+}
+
+.project__links {
+  display: flex;
+  gap: 1rem;
+}
+
+.project__link {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: var(--font-medium);
+}
+
+/* Disabled Link */
+.project__link.disabled {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* Add New Project */
+.add-project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.project__add-button {
+  padding: 1rem 2rem;
+  background: transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: var(--normal-font-size);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+
+@media screen and (max-width: 992px) {
+  .project__card {
+    padding: 1rem;
+  }
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 768px) {
+  .projects__container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+  }
+  .project__header {
+    gap: 0.3rem;
+  }
+}

@@ -67,6 +67,7 @@ const Data = () => {
       <CustomButton
         title="Say Hello"
         isLink={true}
+        size="large"
         href="#contact"
         icon={<FontAwesomeIcon icon={faPaperPlane} />}
       />

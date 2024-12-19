@@ -1,10 +1,24 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CustomButton from "../customButton/CustomButton";
 import "./footer.css";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className="footer">
       <div className="footer_container container">
         <h1 className="footer__title">Jonas Andersen</h1>
+        <div className="footer__admin">
+          <CustomButton
+            title="Admin"
+            isLink={false}
+            size="small"
+            onClick={() => navigate("/login")}
+            icon={<FontAwesomeIcon icon={faUser} />}
+          />
+        </div>
         <ul className="footer__list">
           <li>
             <a href="#about" className="footer__link">

@@ -1,10 +1,20 @@
 .button {
   display: inline-block;
-  padding: 1.25rem 2rem;
   border-radius: 1rem;
   font-weight: var(--font-medium);
 }
 
+.button--small {
+  padding: 0.75rem 1.25rem;
+}
+
+.button--medium {
+  padding: 1rem 1.75rem;
+}
+
+.button--large {
+  padding: 1.25rem 2rem;
+}
 
 .button__icon {
   display: inline-flex;
@@ -18,11 +28,23 @@
   gap: 0.5rem;
 }
 
+.button--small .button__icon {
+  font-size: 1rem;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
-  .button {
+  .button--large {
     padding: 1rem 1.75rem;
+  }
+
+  .button--medium {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .button--small {
+    padding: 0.5rem 1rem;
   }
 
   .button__icon {

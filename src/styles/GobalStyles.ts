@@ -4,14 +4,14 @@ export const GlobalStyles = createGlobalStyle`
 
 
   // Background and text color
-  body, .header, .nav__menu, .contact__form-tag {
+  body, .header, .nav__menu, .contact__form-tag, .project__technology {
     background-color: ${({ theme }) => theme.bodyColor};
     color: ${({ theme }) => theme.textColor};
     transition: background-color 0.3s, color 0.3s;
   }
   
   // Containers Color
-  .about__box, .skills__content, .services__content, .services__modal-content, .contact__card {
+  .about__box, .skills__content, .services__content, .services__modal-content, .contact__card, .project__card {
     background-color: ${({ theme }) => theme.containerColor};
     transition: background-color 0.3s;
   }
@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
   // Text Color
   .home__social-icon,
   p, section__subtitle, .qualification__subtitle, .qualification__calendar, .qualification__rounder, 
-  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close, .services__modal-icon  {
+  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close, .services__modal-icon, .project__icon, .project__link  {
     color: ${({ theme }) => theme.textColor};
     transition: color 0.3s;
     }
@@ -36,6 +36,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .home__social-icon:hover {
+    color: ${({ theme }) => theme.primary};
+    transition: color 0.3s;
+  }
+  .project__link:hover {
     color: ${({ theme }) => theme.primary};
     transition: color 0.3s;
   }
@@ -116,7 +120,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .scrollup {
     background-color: ${({ theme }) => theme.titleColor};
-    transition: background-color 0.3s;
+    transition: all 0.3s;
   }
   .scrollup__icon{
     color: ${({ theme }) => theme.containerColor};
@@ -125,6 +129,17 @@ export const GlobalStyles = createGlobalStyle`
   .scrollup:hover {
     background-color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s;
+  }
+
+  // Projects
+  .project__add-button {
+    border: 2px dashed ${({ theme }) => theme.textColor};
+    color: ${({ theme }) => theme.textColor};
+  }
+
+  .project__add-button:hover {
+    background: var(--title-color);
+    color: var(--container-color);
   }
 
   `;
