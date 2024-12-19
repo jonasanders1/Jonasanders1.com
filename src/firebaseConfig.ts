@@ -1,11 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import {
+  getAuth,
+  GithubAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
-
-console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
-
+// console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
