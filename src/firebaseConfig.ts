@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -20,16 +20,35 @@ export const auth = getAuth(app);
 
 // Initialize Github Provider
 export const githubProvider = new GithubAuthProvider();
+githubProvider.addScope("user:email");
 
 // Github sign in function
-export const signInWithGithub = async () => {
+export const handleGithubSignIn = async (
+  navigate: (path: string) => void,
+  setLoginFailed: (value: boolean) => void
+) => {
   try {
     const result = await signInWithPopup(auth, githubProvider);
-    return result;
+    const token = result.user.providerData[0].uid;
+    if (token === import.meta.env.VITE_GITHUB_ADMIN_USERNAME) {
+      navigate("/");
+    } else {
+      await signOut(auth);
+      setLoginFailed(true);
+    }
   } catch (error) {
-    console.error("Error signing in with Github:", error);
-    throw error;
+    console.error(error);
+    setLoginFailed(true);
   }
 };
 
-export default { db, auth, signInWithGithub };
+export const handleGithubSignOut = async (navigate: (path: string) => void) => {
+  try {
+    await signOut(auth);
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Remove redundant default export since we're using named exports
