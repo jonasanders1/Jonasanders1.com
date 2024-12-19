@@ -13,9 +13,33 @@
   height: 15px;
   border-radius: 50%;
   transition: all 0.3s ease;
-  transform: translate(3px, 0.3px);
+  position: absolute;
+  left: 3px;
 }
 
 .switch-container.dark-mode .switch {
-  transform: translate(22px, 0.3px);
+  left: calc(100% - 15px - 3px);
+}
+
+.toggle-theme .toggle-theme-text {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .switch-container {
+    height: 15px;
+    aspect-ratio: 2/1;
+  }
+  .switch {
+    width: 12px;
+    height: 12px;
+    left: 2px;
+  }
+
+  .switch-container.dark-mode .switch {
+    left: calc(100% - 15px);
+  }
+
+  .toggle-theme .toggle-theme-text {
+    display: block;
+  }
 }

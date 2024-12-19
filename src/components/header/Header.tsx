@@ -114,9 +114,11 @@ const Header = () => {
                 Contact
               </a>
             </li>
-            <li className="nav__item">
-              
-              <ThemeToggle />
+            <li className="nav__item toggle-theme">
+              <span className="nav__link toggle-theme-container">
+                <ThemeToggle />
+                <span className="toggle-theme-text">Theme</span>
+              </span>
             </li>
           </ul>
           <i

@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
   // Text Color
   .home__social-icon,
   p, section__subtitle, .qualification__subtitle, .qualification__calendar, .qualification__rounder, 
-  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close  {
+  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close, .services__modal-icon  {
     color: ${({ theme }) => theme.textColor};
     transition: color 0.3s;
     }
@@ -79,11 +79,52 @@ export const GlobalStyles = createGlobalStyle`
   // Toggle Theme Button
   .switch-container {
   background-color:  ${({ theme }) => theme.primary};
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
   
   }
   .switch {
     background-color:  ${({ theme }) => theme.bodyColor};
-  transition: all 0.3s ease;
-}
+    transition: all 0.3s;
+  }
+
+  // Footer
+  .footer {
+    background-color: ${({ theme }) => theme.containerColor};
+    transition: background-color 0.3s;
+  }
+  .footer__title, .footer__link {
+    color: ${({ theme }) => theme.titleColor};
+    transition: color 0.3s;
+  }
+  .footer__link:hover {
+    color: ${({ theme }) => theme.primary};
+    transition: color 0.3s;
+  }
+  .footer__social-link {
+    background-color: ${({ theme }) => theme.titleColor};
+    color: ${({ theme }) => theme.containerColor};
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .footer__social-link:hover {
+    background-color: ${({ theme }) => theme.primary};
+    transition: background-color 0.3s;
+  }
+  .footer__copy {
+    color: ${({ theme }) => theme.textColor};
+    transition: color 0.3s;
+  }
+
+  .scrollup {
+    background-color: ${({ theme }) => theme.titleColor};
+    transition: background-color 0.3s;
+  }
+  .scrollup__icon{
+    color: ${({ theme }) => theme.containerColor};
+    transition: color 0.3s;
+  }
+  .scrollup:hover {
+    background-color: ${({ theme }) => theme.primary};
+    transition: background-color 0.3s;
+  }
+
   `;
