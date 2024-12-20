@@ -3,8 +3,6 @@ import "./projects.css";
 interface ProjectCardProps {
   title: string;
   description: string;
-  language: string;
-  languageIcon: string;
   technologies: string[];
   demoLink?: string;
   repoLink?: string;
@@ -13,17 +11,14 @@ interface ProjectCardProps {
 const ProjectCard = ({
   title,
   description,
-  languageIcon,
   technologies,
   demoLink,
   repoLink,
 }: ProjectCardProps) => {
   return (
     <div className="project__card">
-      <div className="project__header">
-        <h3 className="project__title">{title}</h3>
-        <i className={`${languageIcon} project__icon`}></i>
-      </div>
+      <h3 className="project__title">{title}</h3>
+
       <p className="project__description">{description}</p>
       <div className="project__technologies">
         {technologies.map((technology, index) => (

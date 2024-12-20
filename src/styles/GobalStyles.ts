@@ -4,7 +4,7 @@ export const GlobalStyles = createGlobalStyle`
 
 
   // Background and text color
-  body, .header, .nav__menu, .contact__form-tag, .project__technology {
+  body, .header, .nav__menu, .contact__form-tag, .project__technology, .add-new-project__form-tag {
     background-color: ${({ theme }) => theme.bodyColor};
     color: ${({ theme }) => theme.textColor};
     transition: background-color 0.3s, color 0.3s;
@@ -25,8 +25,8 @@ export const GlobalStyles = createGlobalStyle`
 
   // Text Color
   .home__social-icon,
-  p, section__subtitle, .qualification__subtitle, .qualification__calendar, .qualification__rounder, 
-  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close, .services__modal-icon, .project__icon, .project__link  {
+  p, section__subtitle, .qualification__subtitle, .qualification__calendar, .qualification__rounder, .add-new-project__form-input, .contact__form-input,
+  .qualification__line, .home__scroll-name, .home__scroll-arrow, .services__modal-close, .services__modal-icon, .project__icon, .project__link, .contact__button  {
     color: ${({ theme }) => theme.textColor};
     transition: color 0.3s;
     }
@@ -66,9 +66,19 @@ export const GlobalStyles = createGlobalStyle`
 
 
   // Form 
-  .contact__form-input{
+  .contact__form-input, .add-new-project__form-input {
     border: 2px solid ${({ theme }) => theme.textColor};
   }
+
+  a, button{
+    outline-color: ${({ theme }) => theme.primary};
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border: 2px solid ${({ theme }) => theme.primary};
+  }
+
 
   // Custom Button
   .button { 

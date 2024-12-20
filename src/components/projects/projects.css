@@ -12,21 +12,11 @@
   border-radius: 1.25rem;
 }
 
-.project__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: var(--mb-1);
-}
-
-.project__icon {
-  font-size: var(--h2-font-size);
-}
 
 .project__title {
   font-size: var(--h3-font-size);
   font-weight: var(--font-medium);
+  margin-bottom: var(--mb-1);
 }
 
 .project__description {
@@ -42,7 +32,7 @@
 }
 .project__technology {
   font-size: var(--small-font-size);
-  padding: 0.2rem 0.3rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.5rem;
 }
 

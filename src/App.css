@@ -16,7 +16,6 @@
   /* --body-color: red; */
   --container-color: #fff;
 
-  
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
 
@@ -84,7 +83,6 @@ textarea {
   font-size: var(--normal-font-size);
 }
 
-
 h1,
 h2,
 h3 {
@@ -103,7 +101,6 @@ a {
 button {
   cursor: pointer;
   border: none;
-  outline: none;
 }
 
 img {
@@ -116,8 +113,6 @@ img {
   padding: 6rem 0 2rem;
 }
 
-
-
 /*=============== LAYOUT ===============*/
 .container {
   max-width: 968px;
@@ -129,8 +124,6 @@ img {
   display: grid;
   gap: 1.5rem;
 }
-
-
 
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
