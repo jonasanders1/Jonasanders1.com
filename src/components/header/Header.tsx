@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./header.css";
-import logo from "../../assets/logo-rounded.png";
-// import { useTheme } from "../../hooks/useTheme";
+import lightLogo from "../../assets/logo-light.png";
+import darkLogo from "../../assets/logo-dark.png";
+import { useTheme } from "../../hooks/useTheme";
 import ThemeToggle from "./ThemeToggle";
 // import ThemeToggle from "./ThemeToggle";
 const Header = () => {
@@ -15,7 +16,7 @@ const Header = () => {
     }
   });
 
-  // const { toggleTheme } = useTheme();
+  const { themeName } = useTheme();
 
   /* ============== Menu Toggle ============== */
   const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -24,7 +25,11 @@ const Header = () => {
     <header className="header">
       <nav className="nav container">
         <a href="index.html" className="nav__logo">
-          <img src={logo} width={30} alt="logo" />
+          <img
+            src={themeName === "light" ? lightLogo : darkLogo}
+            width={30}
+            alt="logo"
+          />
         </a>
 
         <div className={isShowing ? "nav__menu show-menu" : "nav__menu"}>

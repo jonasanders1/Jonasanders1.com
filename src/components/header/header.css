@@ -19,6 +19,9 @@
   align-items: center;
   column-gap: 1rem;
 }
+.nav__logo img {
+  transition: all 0.3s;
+}
 .nav__toggle {
   font-weight: var(--font-medium);
 }

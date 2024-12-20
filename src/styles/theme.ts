@@ -14,7 +14,7 @@ const themes = {
     containerColor: "#2E2E2E", // Slightly lighter gray for containers
     titleColor: "#ffffff", // White for titles
     textColor: "#D1D1D1", // Light gray for regular text
-    primary: "#BB86FC", // Purple accent for dark mode
+    primary: "#f7e02a", // Purple accent for dark mode
     hoverColor: "#985EFF", // Slightly brighter purple for hover effects
     buttonColor: "#BB86FC", // Matches the primary color
     buttonTextColor: "#1E1E1E", // Dark gray for button text
