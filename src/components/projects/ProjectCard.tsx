@@ -21,9 +21,7 @@ const ProjectCard = ({
     <div className="project__card">
       <div className="header__container">
         <h3 className="project__title">{title}</h3>
-        {image && (
-          <img src={image} alt={title} className="project__image" />
-        )}
+        {image && <img src={image} alt={title} className="project__image" />}
       </div>
 
       <p className="project__description">{description}</p>
@@ -42,7 +40,7 @@ const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Visit Project <i className="uil uil-arrow-right"></i>
+          Project <i className="uil uil-arrow-right"></i>
         </a>
         <a
           href={repoLink}
@@ -50,7 +48,7 @@ const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Check Out Code <i className="uil uil-github"></i>
+          Code <i className="uil uil-github"></i>
         </a>
       </div>
     </div>

@@ -59,7 +59,8 @@
 .project__link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 0rem;
   font-size: var(--font-medium);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;

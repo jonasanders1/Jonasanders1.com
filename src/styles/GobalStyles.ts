@@ -159,9 +159,10 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: var(--font-medium);
     display: inline-flex;
     align-items: center;
-    column-gap: 0.5rem;
+    // column-gap: 0.5rem;
     padding: 0.25rem 0.75rem;
     transition: all 0.3s ease;
+    flex: 1;
   }
 
   .project__link:hover {
@@ -176,7 +177,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .project__link i {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     transition: transform 0.3s ease;
   }
 
