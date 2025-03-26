@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import {
   getAuth,
   GithubAuthProvider,
@@ -10,7 +11,7 @@ import {
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "jonasanders1-com.firebaseapp.com",
+  authDomain: "jonasanders1-com.firebaseapp.com", 
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
@@ -22,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore and Auth
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-
+export const storage = getStorage(app);
 // Initialize Github Provider
 export const githubProvider = new GithubAuthProvider();
 githubProvider.addScope("user:email");
@@ -55,5 +56,7 @@ export const handleGithubSignOut = async (navigate: (path: string) => void) => {
     console.error(error);
   }
 };
+
+
 
 // Remove redundant default export since we're using named exports

@@ -4,15 +4,21 @@ interface CustomButtonProps {
   title: string;
   isLink: boolean;
   href?: string;
+  disabled?: boolean;
   onClick?: () => void;
+  isLoading?: boolean;
   size?: "small" | "medium" | "large";
+  type?: "button" | "submit" | "reset";
   icon?: React.ReactNode;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
+  type,
   title,
   isLink,
   href,
+  isLoading,
+  disabled,
   onClick,
   icon,
   size,
@@ -32,12 +38,14 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   } else {
     return (
       <button
+        type={type}
         onClick={onClick}
         className={
           size ? `button button--${size} button--flex` : "button button--flex"
         }
+        disabled={isLoading || disabled}
       >
-        {title}
+        {isLoading ? "Loading..." : title}
         {icon && <span className="button__icon">{icon}</span>}
       </button>
     );
