@@ -1,11 +1,11 @@
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { projectsData } from "./ProjectsData";
 import ProjectCard from "./ProjectCard";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebaseConfig";
+// import { useNavigate } from "react-router-dom";
+// import { auth } from "../../firebaseConfig";
 
 const Projects = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <section className="projects section" id="projects">
       <SectionTitle title="Projects" subtitle="The projects i have worked on" />
@@ -19,10 +19,11 @@ const Projects = () => {
             technologies={project.technologies}
             demoLink={project.demoLink}
             repoLink={project.repoLink}
+            image={project.image}
           />
         ))}
 
-        <div className="project__card add-project">
+        {/* <div className="project__card add-project">
           <button
             className="project__add-button"
             onClick={() => {
@@ -36,7 +37,7 @@ const Projects = () => {
             <i className="uil uil-plus"></i>
             Add New Project
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

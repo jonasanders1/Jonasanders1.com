@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 const ScrollDown: React.FC<CSSProperties> = () => {
   return (
     <div className="home__scroll">
-      <a href="#about" className="home__scroll-button">
+      <a href="#projects" className="home__scroll-button">
         <svg
           width="32px"
           height="32px"

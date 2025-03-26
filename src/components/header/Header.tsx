@@ -47,7 +47,7 @@ const Header = () => {
               </a>
             </li>
 
-            <li className="nav__item" onClick={() => setIsShowing(false)}>
+            {/* <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
                 href="#about"
                 onClick={() => setActiveNav("#about")}
@@ -58,7 +58,7 @@ const Header = () => {
                 <i className="uil uil-user nav__icon"></i>
                 About
               </a>
-            </li>
+            </li> */}
 
             <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
@@ -104,7 +104,7 @@ const Header = () => {
                 Qualification
               </a>
             </li>
-            <li className="nav__item" onClick={() => setIsShowing(false)}>
+            {/* <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
                 href="#contact"
                 onClick={() => setActiveNav("#contact")}
@@ -117,7 +117,7 @@ const Header = () => {
                 <i className="uil uil-message nav__icon"></i>
                 Contact
               </a>
-            </li>
+            </li> */}
             <li className="nav__item toggle-theme">
               <span className="nav__link toggle-theme-container">
                 <ThemeToggle />

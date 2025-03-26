@@ -1,8 +1,10 @@
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import CustomButton from "../customButton/CustomButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+// import CustomButton from "../customButton/CustomButton";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTheme } from "../../hooks/useTheme";
 
 const Data = () => {
+  const { theme } = useTheme();
   return (
     <div className="home__data">
       <h1 className="home__title">
@@ -60,17 +62,15 @@ const Data = () => {
 
       <p className="home__subtitle">Software Engineer</p>
       <p className="home__description">
-        I'm a Frontend Developer with a Computer Science background, passionate
-        about creating responsive, user-friendly web applications and
-        integrating innovative solutions.
+      A little imagination, a lot of ambition, and just the right amount of caffeine -<span style={{ color: theme.primary }}> 'a lot'</span>
       </p>
-      <CustomButton
+      {/* <CustomButton
         title="Say Hello"
         isLink={true}
         size="large"
         href="#contact"
         icon={<FontAwesomeIcon icon={faPaperPlane} />}
-      />
+      /> */}
     </div>
   );
 };

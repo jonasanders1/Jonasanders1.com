@@ -6,6 +6,7 @@ interface ProjectCardProps {
   technologies: string[];
   demoLink?: string;
   repoLink?: string;
+  image?: string;
 }
 
 const ProjectCard = ({
@@ -14,10 +15,16 @@ const ProjectCard = ({
   technologies,
   demoLink,
   repoLink,
+  image,
 }: ProjectCardProps) => {
   return (
     <div className="project__card">
-      <h3 className="project__title">{title}</h3>
+      <div className="header__container">
+        <h3 className="project__title">{title}</h3>
+        {image && (
+          <img src={image} alt={title} className="project__image" />
+        )}
+      </div>
 
       <p className="project__description">{description}</p>
       <div className="project__technologies">
@@ -35,7 +42,7 @@ const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Demo <i className="uil uil-arrow-right"></i>
+          Visit Project <i className="uil uil-arrow-right"></i>
         </a>
         <a
           href={repoLink}
@@ -43,7 +50,7 @@ const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Code <i className="uil uil-github"></i>
+          Check Out Code <i className="uil uil-github"></i>
         </a>
       </div>
     </div>

@@ -1,38 +1,25 @@
+import doodleMindImg from "../../assets/project-images/doodle-mind.png";
+import wageWiseImg from "../../assets/project-images/wagewise.png";
+
 export const projectsData = [
   {
     id: 1,
-    title: "Personal Portfolio Website",
+    title: "Doodle Mind",
     description:
-      "Modern and responsive portfolio website built with React, TypeScript and styled-components. Features dark/light theme, smooth animations and mobile-first design.",
-    technologies: ["React", "TypeScript", "styled-components"],
-    demoLink: "https://portfolio.example.com",
-    repoLink: "https://github.com/username/portfolio",
+      "A custom-built Convolutional Neural Network (CNN) that classifies hand-drawn images into 11 categories. Sketch any category and see if the model can predict it—though, fair warning, its trash!",
+    technologies: ["Python", "TensorFlow", "Pandas", "Flask API", "React", "Tailwind CSS"],
+    demoLink: "",
+    repoLink: "https://github.com/jonasanders1/drawing-classifier",
+    image: doodleMindImg,
   },
   {
     id: 2,
-    title: "AI Image Generation App",
+    title: "WageWise",
     description:
-      "Full-stack application that generates images using OpenAI's DALL-E API. Built with MERN stack and features user authentication, image sharing and download capabilities.",
-    technologies: ["React", "TypeScript", "styled-components"],
-    demoLink: "https://ai-image-gen.example.com",
-    repoLink: "https://github.com/username/ai-image-generator",
-  },
-  {
-    id: 3,
-    title: "E-Commerce Dashboard",
-    description:
-      "Admin dashboard for e-commerce platform with analytics, inventory management and order processing. Built with Next.js and features real-time updates using WebSocket.",
-    technologies: ["React", "TypeScript", "styled-components"],
-    demoLink: "https://dashboard.example.com",
-    repoLink: "https://github.com/username/ecommerce-dashboard",
-  },
-  {
-    id: 4,
-    title: "Machine Learning Stock Predictor",
-    description:
-      "Python application that uses LSTM neural networks to predict stock market trends. Features data visualization and backtesting capabilities.",
-    technologies: ["Python", "TensorFlow", "Pandas"],
-    demoLink: "https://ml-stocks.example.com",
-    repoLink: "https://github.com/username/stock-predictor",
-  },
+      "Developed a sophisticated income tracking application utilizing React, TypeScript, and Recharts to visualize financial data through interactive stacked bar charts and customizable data visualizations.",
+    technologies: ["React", "TypeScript", "Recharts", "Tailwind CSS", "Firebase"],
+    demoLink: "https://wagewise.jonasanders1.com/",
+    repoLink: "https://github.com/jonasanders1/wagewise",
+    image: wageWiseImg,
+  }
 ];

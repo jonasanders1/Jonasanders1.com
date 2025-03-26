@@ -152,4 +152,36 @@ export const GlobalStyles = createGlobalStyle`
     color: var(--container-color);
   }
 
+  // Project Links
+  .project__link {
+    color: ${({ theme }) => theme.containerColor};
+    background-color: ${({ theme }) => theme.titleColor};
+    font-weight: var(--font-medium);
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .project__link:hover {
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.containerColor};
+  }
+
+  .project__link.disabled {
+    background-color: ${({ theme }) => theme.textColor};
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .project__link i {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .project__link:hover i {
+    transform: translateX(4px);
+  }
+
   `;
