@@ -22,7 +22,7 @@ const Projects = () => {
             image={project.image}
           />
         ))}
-      {auth.currentUser && (
+
         <div className="project__card add-project">
           <button
             className="project__add-button"
@@ -38,7 +38,6 @@ const Projects = () => {
             Add New Project
           </button>
         </div>
-      )}
       </div>
     </section>
   );
