@@ -14,7 +14,7 @@ import { GlobalStyles } from "./styles/GobalStyles";
 import Projects from "./components/projects/Projects";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LogIn from "./pages/login/LogIn";
-import AddNewProject from "./pages/addProject/AddNewProject";
+import ProjectForm from "./components/projectform/ProjectForm";
 
 function App() {
   return (
@@ -40,7 +40,8 @@ function App() {
               }
             />
             <Route path="/login" element={<LogIn />} />
-            <Route path="/addnewproject" element={<AddNewProject />} />
+            <Route path="/addproject" element={<ProjectForm />} />
+            <Route path="/editproject/:projectId" element={<ProjectForm />} />
           </Routes>
         </main>
         <ScrollUp />

@@ -62,15 +62,8 @@ const Data = () => {
 
       <p className="home__subtitle">Software Engineer</p>
       <p className="home__description">
-      A little imagination, a lot of ambition, and just the right amount of caffeine -<span style={{ color: theme.primary }}> 'a lot'</span>
+      A little imagination, a lot of ambition, and just the right amount of caffeine<span style={{ color: theme.primary }}>....a lot!</span>
       </p>
-      {/* <CustomButton
-        title="Say Hello"
-        isLink={true}
-        size="large"
-        href="#contact"
-        icon={<FontAwesomeIcon icon={faPaperPlane} />}
-      /> */}
     </div>
   );
 };

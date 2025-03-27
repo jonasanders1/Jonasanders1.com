@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 
-
   // Background and text color
   body, .header, .nav__menu, .contact__form-tag, .project__technology, .add-new-project__form-tag {
     background-color: ${({ theme }) => theme.bodyColor};
@@ -184,5 +183,12 @@ export const GlobalStyles = createGlobalStyle`
   .project__link:hover i {
     transform: translateX(4px);
   }
+
+  .section__button, .section__button--admin {
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.containerColor};
+    transition: background-color 0.3s;
+  }
+  
 
   `;

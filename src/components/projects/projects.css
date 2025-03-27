@@ -6,37 +6,136 @@
 }
 
 .project__card {
-  min-width: 280px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  border-radius: 1.25rem;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--container-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  grid-column: span 1;
+  transition: grid-column 0.3s ease;
 }
 
-.header__container {
+.project__card.expanded {
+  grid-column: 1 / -1;
+}
+
+.project__header {
+  position: relative;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.project__overlay {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  gap: 0.5rem;
-  margin-bottom: var(--mb-1);
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.project__header .project__title {
+  margin-bottom: 0.5rem;
+  font-size: var(--h3-font-size);
+}
+
+.project__header .project__description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0;
+  font-size: var(--small-font-size)
+}
+
+.project__image {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.project__image.expanded {
+  height: 400px;
+}
+
+.project__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project__image-expand {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 70%,
+    transparent 100%
+  );
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 2rem 0 0.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.project__image-expand i {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+/* Show expand button on hover */
+.project__image:hover .project__image-expand {
+  opacity: 1;
+}
+
+/* Hover effects */
+.project__image-expand:hover i {
+  transform: scale(1.2);
+}
+
+/* Animation for the expand/collapse icon */
+.project__image.expanded .project__image-expand i {
+  transform: rotate(180deg);
+}
+
+.project__content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .project__title {
   font-size: var(--h3-font-size);
-  font-weight: var(--font-medium);
-}
-
-
-.project__image {
-  max-width: 30px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .project__description {
   font-size: var(--small-font-size);
-  margin-bottom: var(--mb-1);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project__footer {
+  margin-top: auto;
 }
 
 .project__technologies {
@@ -45,35 +144,43 @@
   gap: 0.5rem;
   margin-bottom: var(--mb-1);
 }
+
 .project__technology {
-  font-size: var(--small-font-size);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.5rem;  
+  font-size: var(--smaller-font-size);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--container-color);
+  color: var(--text-color);
 }
 
 .project__links {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .project__link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0rem;
-  font-size: var(--font-medium);
-  padding: 0.5rem 1rem;
+  justify-content: center;
+  gap: 0.2rem;
+  font-size: var(--small-font-size);
+  padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   transition: all 0.3s;
-  background-color: transparent;
-  border: 2px solid var(--primary-color);
+  background-color: var(--container-color);
+  color: var(--text-color);
+  border: 2px solid var(--title-color);
 }
 
-/* Disabled Link */
+.project__link:hover {
+  background-color: var(--title-color);
+  color: var(--container-color);
+}
+
 .project__link.disabled {
+  opacity: 0.3;
   pointer-events: none;
-  cursor: default;
-  opacity: 0.5;
+  background-color: var(--text-color);
 }
 
 /* Add New Project */
@@ -96,10 +203,93 @@
   transition: all 0.3s;
 }
 
+.project__actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+/* Move existing button styles under .project__actions */
+.project__action-button {
+  position: static; /* Override absolute positioning */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(2px);
+
+}
+
+/* Update hover selector to target actions container */
+.project__card:hover .project__actions .project__action-button {
+  opacity: 0.9;
+}
+
+/* Different hover colors for edit and delete */
+.project__action-button:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.project__action-button:first-child:hover {
+  background-color: rgba(0, 120, 255, 0.8);
+}
+
+/* Add loading animation for delete action */
+.project__action-button.deleting i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 @media screen and (max-width: 992px) {
-  .project__card {
+  .project__header {
+    height: 250px;
+  }
+  
+  .project__overlay {
     padding: 1rem;
+  }
+  
+  .project__image.expanded {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .projects__container {
+    grid-template-columns: 1fr;
+  }
+  
+  .project__card, .project__card.expanded {
+    grid-column: 1;
+  }
+  
+  .project__image {
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .project__header {
+    height: 200px;
+  }
+  
+  .project__image.expanded {
+    height: 250px;
   }
 }
 
@@ -107,10 +297,10 @@
 /* For medium devices */
 @media screen and (max-width: 768px) {
   .projects__container {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: auto;
+    grid-template-columns: 1fr;
   }
-  .project__header {
-    gap: 0.3rem;
+  
+  .project__image {
+    height: 200px;
   }
 }

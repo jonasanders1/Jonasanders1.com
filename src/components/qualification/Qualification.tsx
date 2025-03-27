@@ -40,7 +40,7 @@ const Qualification = () => {
 
   return (
     <section className="qualification section" id="qualification">
-      <SectionTitle title="Qualification" subtitle="My personal journey" />
+      <SectionTitle title="Qualification" subtitle="My personal journey" button={true} buttonPath="/addnewqualification" />
 
       <div className="qualification__container container">
         <div className="qualification__tabs">

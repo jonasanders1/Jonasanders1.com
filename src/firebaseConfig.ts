@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getAuth,
   GithubAuthProvider,
@@ -57,6 +57,17 @@ export const handleGithubSignOut = async (navigate: (path: string) => void) => {
   }
 };
 
-
+// Add this function to handle image uploads
+export const uploadProjectImage = async (image: File) => {
+  try {
+    const storageRef = ref(storage, `project-images/${Date.now()}-${image.name}`);
+    const uploadResult = await uploadBytes(storageRef, image);
+    const downloadURL = await getDownloadURL(uploadResult.ref);
+    return downloadURL;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
+};
 
 // Remove redundant default export since we're using named exports

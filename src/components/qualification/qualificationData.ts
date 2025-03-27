@@ -36,4 +36,11 @@ export const qualificationData: QualificationItem[] = [
     calendar: "2024",
     type: "experience",
   },
+  {
+    id: 6,
+    title: "Outlier",
+    subtitle: "Evaluating AI models for accuracy, bias detection, and performance optimization.",
+    calendar: "2025",
+    type: "experience",
+  },
 ];

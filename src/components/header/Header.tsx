@@ -4,8 +4,10 @@ import lightLogo from "../../assets/logo-light.png";
 import darkLogo from "../../assets/logo-dark.png";
 import { useTheme } from "../../hooks/useTheme";
 import ThemeToggle from "./ThemeToggle";
+import { useNavigate } from "react-router-dom";
 // import ThemeToggle from "./ThemeToggle";
 const Header = () => {
+  const navigate = useNavigate();
   /* ============== Change Background Header ============== */
   window.addEventListener("scroll", function () {
     const header = this.document.querySelector(".header");
@@ -46,19 +48,6 @@ const Header = () => {
                 Home
               </a>
             </li>
-
-            {/* <li className="nav__item" onClick={() => setIsShowing(false)}>
-              <a
-                href="#about"
-                onClick={() => setActiveNav("#about")}
-                className={
-                  activeNav === "#about" ? "nav__link active-link" : "nav__link"
-                }
-              >
-                <i className="uil uil-user nav__icon"></i>
-                About
-              </a>
-            </li> */}
 
             <li className="nav__item" onClick={() => setIsShowing(false)}>
               <a
@@ -104,20 +93,13 @@ const Header = () => {
                 Qualification
               </a>
             </li>
-            {/* <li className="nav__item" onClick={() => setIsShowing(false)}>
-              <a
-                href="#contact"
-                onClick={() => setActiveNav("#contact")}
-                className={
-                  activeNav === "#contact"
-                    ? "nav__link active-link"
-                    : "nav__link"
-                }
-              >
-                <i className="uil uil-message nav__icon"></i>
-                Contact
+            {/* Admin */}
+            <li className="nav__item" onClick={() => setIsShowing(false)}>
+              <a href="#" className="nav__link" onClick={() => navigate("/login")}>
+                <i className="uil uil-file-alt nav__icon"></i>
+                Admin
               </a>
-            </li> */}
+            </li>
             <li className="nav__item toggle-theme">
               <span className="nav__link toggle-theme-container">
                 <ThemeToggle />

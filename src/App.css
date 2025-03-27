@@ -13,7 +13,6 @@
   --title-color-dark: hsl(var(--hue), var(--sat), 0%);
   --text-color: hsl(var(--hue), var(--sat), 46%);
   --body-color: hsl(var(--hue), var(--sat), 98%);
-  /* --body-color: red; */
   --container-color: #fff;
 
   /*========== Font and typography ==========*/
@@ -125,6 +124,10 @@ img {
   gap: 1.5rem;
 }
 
+.section__title-container {
+  margin-bottom: var(--mb-3);
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
@@ -155,8 +158,8 @@ img {
     padding: 2rem 0 4rem;
   }
 
-  .section__subtitle {
-    margin-bottom: var(--mb-3);
+  .section__title-container {
+    margin-bottom: var(--mb-1);
   }
 }
 

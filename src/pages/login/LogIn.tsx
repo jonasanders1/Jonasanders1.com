@@ -10,33 +10,6 @@ import "./logIn.css";
 import { useState } from "react";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-// const handleGithubSignIn = async (
-//   navigate: (path: string) => void,
-//   setLoginFailed: (value: boolean) => void
-// ) => {
-//   try {
-//     const result = await signInWithPopup(auth, githubProvider);
-//     const token = result.user.providerData[0].uid;
-//     if (token === import.meta.env.VITE_GITHUB_ADMIN_USERNAME) {
-//       navigate("/");
-//     } else {
-//       await signOut(auth);
-//       setLoginFailed(true);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     setLoginFailed(true);
-//   }
-// };
-
-// const handleGithubSignOut = async (navigate: (path: string) => void) => {
-//   try {
-//     await signOut(auth);
-//     navigate("/");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -51,6 +24,7 @@ const LogIn = () => {
       <SectionTitle
         title={isLoggedIn ? "Logged In" : "Log in"}
         subtitle={isLoggedIn ? "You are logged in" : "Log in to your account"}
+        
       />
 
       <div className="login__container container">
