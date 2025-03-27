@@ -3,9 +3,11 @@ import { db } from "../../firebaseConfig";
 import { deleteDoc, doc } from "firebase/firestore";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "./projects.css";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../customButton/CustomButton";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 interface ProjectCardProps {
   id: string;
@@ -35,7 +37,8 @@ const ProjectCard = ({
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!window.confirm("Are you sure you want to delete this project?")) return;
+    if (!window.confirm("Are you sure you want to delete this project?"))
+      return;
 
     try {
       setIsDeleting(true);
@@ -55,18 +58,18 @@ const ProjectCard = ({
   };
 
   return (
-    <div className={`project__card ${isExpanded ? 'expanded' : ''}`}>
+    <div className={`project__card ${isExpanded ? "expanded" : ""}`}>
       {isLoggedIn && (
         <div className="project__actions">
-          <button 
+          <button
             className="project__action-button"
             onClick={handleEdit}
             aria-label="Edit project"
           >
             <FontAwesomeIcon icon={faPen} />
           </button>
-          <button 
-            className={`project__action-button ${isDeleting ? 'deleting' : ''}`}
+          <button
+            className={`project__action-button ${isDeleting ? "deleting" : ""}`}
             onClick={handleDelete}
             disabled={isDeleting}
             aria-label="Delete project"
@@ -77,22 +80,22 @@ const ProjectCard = ({
       )}
 
       {image && (
-        <div className={`project__image ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`project__image ${isExpanded ? "expanded" : ""}`}>
           <img src={image} alt={title} />
-          <button 
+          <button
             className="project__image-expand"
             onClick={() => setIsExpanded(!isExpanded)}
             aria-label={isExpanded ? "Collapse image" : "Expand image"}
           >
-            <i className={`uil uil-angle-${isExpanded ? 'up' : 'down'}`}></i>
+            <i className={`uil uil-angle-${isExpanded ? "up" : "down"}`}></i>
           </button>
         </div>
       )}
-      
+
       <div className="project__content">
         <h3 className="project__title">{title}</h3>
         <p className="project__description">{description}</p>
-        
+
         <div className="project__footer">
           <div className="project__technologies">
             {technologies.map((technology, index) => (
@@ -101,24 +104,25 @@ const ProjectCard = ({
               </span>
             ))}
           </div>
-
           <div className="project__links">
-            <a
-              href={demoLink}
-              className={demoLink ? "project__link" : "project__link disabled"}
-              target="_blank"
-              rel="noopener noreferrer"
+            <CustomButton 
+              variant="primary" 
+              size="small" 
+              href={demoLink} 
+              icon={<FontAwesomeIcon icon={faArrowRight} />}
+              isLink={true}
             >
-              Project <i className="uil uil-arrow-right"></i>
-            </a>
-            <a
-              href={repoLink}
-              className={repoLink ? "project__link" : "project__link disabled"}
-              target="_blank"
-              rel="noopener noreferrer"
+              Project
+            </CustomButton>
+            <CustomButton 
+              variant="primary" 
+              size="small" 
+              href={repoLink} 
+              icon={<FontAwesomeIcon icon={faGithub} />}
+              isLink={true}
             >
-              Code <i className="uil uil-github"></i>
-            </a>
+              GitHub
+            </CustomButton>
           </div>
         </div>
       </div>

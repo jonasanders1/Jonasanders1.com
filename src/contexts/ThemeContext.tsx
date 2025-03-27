@@ -18,24 +18,22 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [themeName, setThemeName] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    return savedTheme || "dark"; // Verify this line shows "dark"
+    return (localStorage.getItem("theme") as Theme) || "light";
   });
 
   useEffect(() => {
+    document.documentElement.setAttribute('data-theme', themeName);
     localStorage.setItem("theme", themeName);
   }, [themeName]);
 
   const toggleTheme = () => {
-    setThemeName((prev) => (prev === "light" ? "dark" : "light"));
+    setThemeName(prev => prev === "light" ? "dark" : "light");
   };
 
   const currentTheme = themes[themeName];
 
   return (
-    <ThemeContext.Provider
-      value={{ toggleTheme, theme: currentTheme, themeName }}
-    >
+    <ThemeContext.Provider value={{ toggleTheme, themeName, theme: currentTheme }}>
       <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

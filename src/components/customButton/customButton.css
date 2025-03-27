@@ -1,35 +1,106 @@
+/* Base button styles */
 .button {
-  display: inline-block;
-  border-radius: 1rem;
-  font-weight: var(--font-medium);
-}
-
-.button--small {
-  padding: 0.75rem 1.25rem;
-}
-
-.button--medium {
-  padding: 1rem 1.75rem;
-}
-
-.button--large {
-  padding: 1.25rem 2rem;
-}
-
-.button__icon {
-  display: inline-flex;
-  align-items: center;
-  font-size: 1.2rem;
-}
-
-.button--flex {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: var(--font-medium);
+  cursor: pointer !important; /* Force cursor */
+  transition: all 0.3s ease;
 }
 
-.button--small .button__icon {
-  font-size: 1rem;
+/* Size variants */
+.button--small {
+  padding: 0.5rem 1rem;
+  font-size: var(--small-font-size);
+}
+
+.button--large {
+  padding: 1rem 2rem;
+  font-size: var(--normal-font-size);
+}
+
+/* Style variants */
+.button--primary {
+  background-color: var(--color-title);
+  color: var(--color-container);
+}
+
+.button--primary:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-container);
+}
+
+.button--secondary {
+  background-color: var(--color-container);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.button--secondary:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-button-text);
+}
+
+.button--outline {
+  background-color: transparent;
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
+}
+
+.button--outline:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button--text {
+  background-color: transparent;
+  color: var(--color-text);
+  padding: 0;
+}
+
+.button--text:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.button--add {
+  width: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-body);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon styling */
+.button--icon .button__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.button--small.button--icon .button__icon {
+  font-size: 1em;
+}
+
+/* Ensure anchor tags have the same cursor */
+a.button {
+  cursor: pointer !important;
+  text-decoration: none;
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+}
+
+/* Loading state */
+.button:disabled.loading {
+  cursor: wait !important;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -51,4 +122,14 @@
     width: 22px;
     height: 22px;
   }
+}
+
+/* Link style cursor */
+.button--text:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Add cursor style for hover states */
+.button:hover:not(:disabled) {
+  cursor: pointer;
 }

@@ -255,13 +255,13 @@ const ProjectForm = () => {
 
           <div className="add-new-project__form-button">
             <CustomButton
-              type="submit"
               size="large"
-              title={isLoading ? "Saving..." : "Save Project"}
               icon={<FontAwesomeIcon icon={faSave} />}
               disabled={isLoading}
               isLink={false}
-            />
+            >
+              {isLoading ? "Saving..." : "Save Project"}
+            </CustomButton>
           </div>
         </form>
       </div>

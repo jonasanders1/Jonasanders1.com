@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav container">
-        <a href="index.html" className="nav__logo">
+        <a href="#home" className="nav__logo">
           <img
             src={themeName === "light" ? lightLogo : darkLogo}
             width={30}

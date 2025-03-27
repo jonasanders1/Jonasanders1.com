@@ -39,21 +39,23 @@ const LogIn = () => {
           >
             <p>Access denied... Only admin login is allowed.</p>
             <CustomButton
-              title="Return to Home"
               onClick={() => navigate("/")}
               isLink={false}
               size="large"
               icon={<FontAwesomeIcon icon={faHome} />}
-            />
+            >
+              Return to Home
+            </CustomButton>
           </div>
         ) : (
           <CustomButton
-            title={isLoggedIn ? "Sign out of GitHub" : "Sign in with GitHub"}
             onClick={isLoggedIn ? handleSignOut : signInWithGithub}
             isLink={false}
             size="large"
             icon={<FontAwesomeIcon icon={faGithub} />}
-          />
+          >
+            {isLoggedIn ? "Sign out of GitHub" : "Sign in with GitHub"}
+          </CustomButton>
         )}
       </div>
     </section>

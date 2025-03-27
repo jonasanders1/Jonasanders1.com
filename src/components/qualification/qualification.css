@@ -24,7 +24,7 @@
   margin-right: var(--mb-0-25);
 }
 .qualification__active {
-  color: var(--title-color-dark);
+  color: var(--color-primary);
 }
 .qualification__sections {
   display: grid;

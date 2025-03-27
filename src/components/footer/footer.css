@@ -1,5 +1,6 @@
 .footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--color-container);
 }
 .footer_container {
   padding: 2rem 0rem 3rem;
@@ -35,9 +36,14 @@
   padding: 0.4rem;
   border-radius: 0.5rem;
   display: inline-flex;
+  background-color: var(--color-text);
+  color: var(--color-body);
 }
 
-
+.footer__social-link:hover {
+  background-color: var(--color-primary);
+  color: var(--color-body);
+}
 
 .footer__copy {
   display: block;

@@ -1,26 +1,30 @@
 import "./App.css";
-// import About from "./components/about/About";
-// import Contact from "./components/contact/Contact";
+// import "./styles/global.css";
+import "./styles/colors.css";
 import Header from "./components/header/Header";
+
+// Home page sections 
 import Home from "./components/home/Home";
-// import Portfolio from "./components/portfolio/Portfolio";
-import Qualification from "./components/qualification/Qualification";
-// import Services from "./components/services/Services";
+import Projects from "./components/projects/Projects";
 import Skills from "./components/skills/Skills";
+import Qualification from "./components/qualification/Qualification";
+
+
+
 import Footer from "./components/footer/Footer";
 import ScrollUp from "./components/scrollup/ScrollUp";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { GlobalStyles } from "./styles/GobalStyles";
-import Projects from "./components/projects/Projects";
+// import { GlobalStyles } from "./styles/GobalStyles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LogIn from "./pages/login/LogIn";
+
 import ProjectForm from "./components/projectform/ProjectForm";
 
 function App() {
   return (
     <Router>
       <ThemeProvider>
-        <GlobalStyles />
+        {/* <GlobalStyles /> */}
 
         <main className="main">
           <Routes>
@@ -30,11 +34,9 @@ function App() {
                 <>
                   <Header />
                   <Home />
-                  {/* <About /> */}
                   <Projects />
                   <Skills />
                   <Qualification />
-                  {/* <Contact /> */}
                   <Footer />
                 </>
               }

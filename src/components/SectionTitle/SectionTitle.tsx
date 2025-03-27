@@ -3,6 +3,7 @@ import "./sectionTitle.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import CustomButton from "../customButton/CustomButton";
 
 type SectionTitleProps = {
   title: string;
@@ -23,15 +24,15 @@ const SectionTitle = ({ title, subtitle, button, buttonPath, navigateBack }: Sec
         </button>
       )}
 
-      <div className="section__title-container-inner">
+      <div className="section__title-container-inner" style={isLoggedIn ? {paddingLeft: "40px"} : {}}>
         <h2 className="section__title">{title}</h2>
         <span className="section__subtitle">{subtitle}</span>
       </div>
 
       {isLoggedIn && button && buttonPath && !navigateBack && (
-        <button className="section__button" onClick={() => navigate(buttonPath)}>
+        <CustomButton variant="add" size="small" onClick={() => navigate(buttonPath)}>
           <FontAwesomeIcon icon={faPlus} />
-        </button>
+        </CustomButton>
       )}
     </div>
   );

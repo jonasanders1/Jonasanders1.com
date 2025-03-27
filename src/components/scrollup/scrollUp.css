@@ -7,6 +7,13 @@
   border-radius: 0.4rem;
   z-index: var(--z-tooltip);
   transition: 0.4s;
+  background-color: var(--color-text);
+  color: var(--color-body);
+}
+
+.scrollup:hover {
+  background-color: var(--color-primary);
+  color: var(--color-body);
 }
 
 .scrollup__icon {
@@ -33,7 +40,7 @@
 /* For medium devices */
 @media screen and (max-width: 768px) {
   .show-scroll {
-    bottom: 4rem;
+    bottom: 6rem;
   }
 }
 

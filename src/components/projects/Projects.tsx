@@ -47,6 +47,27 @@ const Projects = () => {
     return (
       <section className="projects section" id="projects">
         <SectionTitle title="Projects" subtitle="Loading projects..." />
+        <div className="projects__container container grid">
+          {[1, 2, 3, 4].map((index) => (
+            <div key={index} className="project__card skeleton">
+              <div className="project__header skeleton-image"></div>
+              <div className="project__content">
+                <div className="skeleton-text skeleton-title"></div>
+                <div className="skeleton-text"></div>
+                <div className="skeleton-text"></div>
+                <div className="project__technologies">
+                  {[1, 2, 3].map((techIndex) => (
+                    <div key={techIndex} className="skeleton-tech"></div>
+                  ))}
+                </div>
+                <div className="project__links">
+                  <div className="skeleton-button"></div>
+                  <div className="skeleton-button"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     );
   }

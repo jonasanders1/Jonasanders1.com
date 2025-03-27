@@ -72,9 +72,17 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-body);
 }
 
-body,
+body {
+  background-color: var(--color-body);
+  color: var(--color-text);
+  min-height: 100vh; /* This ensures minimum full viewport height */
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
 button,
 input,
 textarea {
@@ -176,4 +184,8 @@ img {
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
   }
+}
+
+.app {
+  background-color: var(--color-body);
 }

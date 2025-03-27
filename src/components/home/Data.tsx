@@ -1,6 +1,4 @@
-// import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-// import CustomButton from "../customButton/CustomButton";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useTheme } from "../../hooks/useTheme";
 
 const Data = () => {
