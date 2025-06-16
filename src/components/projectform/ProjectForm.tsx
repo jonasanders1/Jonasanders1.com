@@ -5,11 +5,9 @@ import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import "./projectForm.css";
 import { uploadProjectImage } from "../../firebaseConfig";
-
-import "./projectForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from "../customButton/CustomButton";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface ProjectFormData {
   title: string;
@@ -17,7 +15,7 @@ interface ProjectFormData {
   demoLink: string;
   repoLink: string;
   technologies: string[];
-  image?: string;
+  images?: string[];
 }
 
 const ProjectForm = () => {
@@ -29,8 +27,9 @@ const ProjectForm = () => {
     demoLink: "",
     repoLink: "",
     technologies: [],
+    images: [],
   });
-  const [image, setImage] = useState<File | null>(null);
+  const [newImages, setNewImages] = useState<File[]>([]);
   const [tag, setTag] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(!!projectId);
@@ -51,7 +50,7 @@ const ProjectForm = () => {
             demoLink: projectData.demoLink || "",
             repoLink: projectData.repoLink || "",
             technologies: projectData.technologies || [],
-            image: projectData.image,
+            images: projectData.images || [],
           });
         }
       } catch (error) {
@@ -94,8 +93,20 @@ const ProjectForm = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setNewImages((prev) => [...prev, ...files]);
+    }
+  };
+
+  const handleRemoveImage = (index: number, isNewImage: boolean) => {
+    if (isNewImage) {
+      setNewImages((prev) => prev.filter((_, i) => i !== index));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        images: prev.images?.filter((_, i) => i !== index) || [],
+      }));
     }
   };
 
@@ -104,10 +115,10 @@ const ProjectForm = () => {
     setIsLoading(true);
 
     try {
-      let imageUrl = formData.image || "";
-      if (image) {
-        imageUrl = await uploadProjectImage(image);
-      }
+      // Upload new images
+      const uploadedImageUrls = await Promise.all(
+        newImages.map((image) => uploadProjectImage(image))
+      );
 
       const projectData = {
         title: formData.title,
@@ -115,7 +126,7 @@ const ProjectForm = () => {
         ...(formData.demoLink.trim() && { demoLink: formData.demoLink }),
         ...(formData.repoLink.trim() && { repoLink: formData.repoLink }),
         technologies: formData.technologies,
-        ...(imageUrl && { image: imageUrl }),
+        images: [...(formData.images || []), ...uploadedImageUrls],
         ...(isEditMode ? {} : { createdAt: new Date() }),
       };
 
@@ -153,9 +164,7 @@ const ProjectForm = () => {
             ? "Update project details"
             : "Add a new project to your portfolio"
         }
-        navigateBack={true}
-        button={true}
-        buttonPath="/"
+        backButton={true}
       />
 
       <div className="add-new-project__content container">
@@ -174,14 +183,68 @@ const ProjectForm = () => {
           </div>
 
           <div className="add-new-project__form-div">
-            <label className="add-new-project__form-tag">Project Image</label>
+            <label className="add-new-project__form-tag">Project Images</label>
             <input
               type="file"
               accept="image/*"
+              multiple
               className="add-new-project__form-input"
               onChange={handleImageChange}
-              placeholder="Choose an image..."
+              placeholder="Choose images..."
             />
+
+            {/* Preview of existing images */}
+            {formData.images && formData.images.length > 0 && (
+              <div className="add-new-project__image-preview">
+                <h4>Existing Images</h4>
+                <div className="add-new-project__image-grid">
+                  {formData.images.map((imageUrl, index) => (
+                    <div
+                      key={`existing-${index}`}
+                      className="add-new-project__image-item"
+                    >
+                      <img src={imageUrl} alt={`Preview ${index + 1}`} />
+                      <button
+                        type="button"
+                        className="add-new-project__image-remove"
+                        onClick={() => handleRemoveImage(index, false)}
+                        aria-label="Remove image"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Preview of new images */}
+            {newImages.length > 0 && (
+              <div className="add-new-project__image-preview">
+                <h4>New Images</h4>
+                <div className="add-new-project__image-grid">
+                  {newImages.map((image, index) => (
+                    <div
+                      key={`new-${index}`}
+                      className="add-new-project__image-item"
+                    >
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`New Preview ${index + 1}`}
+                      />
+                      <button
+                        type="button"
+                        className="add-new-project__image-remove"
+                        onClick={() => handleRemoveImage(index, true)}
+                        aria-label="Remove image"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="add-new-project__form-div add-new-project__form-area">

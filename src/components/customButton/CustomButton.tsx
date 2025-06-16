@@ -10,11 +10,13 @@ interface CustomButtonProps {
   onClick?: () => void;
   isLoading?: boolean;
   children: React.ReactNode;
+  color?: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   variant = 'primary',
   size = 'small',
+  color,
   icon,
   isLink,
   href,
@@ -40,6 +42,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       className={baseClass}
       onClick={onClick}
       disabled={isDisabled}
+      style={{ backgroundColor: color }}
     >
       {icon && <span className="button__icon">{icon}</span>}
       <span className="button__text">

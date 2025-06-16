@@ -3,6 +3,8 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import ProjectCard from "./ProjectCard";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -17,7 +19,7 @@ interface Project {
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const navigate = useNavigate();
   const fetchProjects = async () => {
     try {
       const projectsQuery = query(
@@ -43,24 +45,35 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
-  if (isLoading) {
-    return (
-      <section className="projects section" id="projects">
-        <SectionTitle title="Projects" subtitle="Loading projects..." />
+  return (
+    <section className="projects section" id="projects">
+      <SectionTitle
+        title="Projects"
+        subtitle="The projects I have worked on"
+        buttons={[
+          {
+            icon: faPlus,
+            onClick: () => navigate("/addproject"),
+            variant: "add",
+          },
+        ]}
+      />
+
+      {isLoading ? (
         <div className="projects__container container grid">
           {[1, 2, 3, 4].map((index) => (
             <div key={index} className="project__card skeleton">
-              <div className="project__header skeleton-image"></div>
               <div className="project__content">
-                <div className="skeleton-text skeleton-title"></div>
-                <div className="skeleton-text"></div>
-                <div className="skeleton-text"></div>
+                <div className="skeleton-title"></div>
+                <div className="skeleton-description"></div>
+                <div className="skeleton-description"></div>
+                <div className="skeleton-description"></div>
                 <div className="project__technologies">
                   {[1, 2, 3].map((techIndex) => (
                     <div key={techIndex} className="skeleton-tech"></div>
                   ))}
                 </div>
-                <div className="project__links">
+                <div className="skeleton-links">
                   <div className="skeleton-button"></div>
                   <div className="skeleton-button"></div>
                 </div>
@@ -68,34 +81,21 @@ const Projects = () => {
             </div>
           ))}
         </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="projects section" id="projects">
-      <SectionTitle
-        title="Projects"
-        subtitle="The projects I have worked on"
-        button={true}
-        buttonPath="/addproject"
-      />
-
-      <div className="projects__container container grid">
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            id={project.id}
-            title={project.title}
-            description={project.description}
-            technologies={project.technologies}
-            demoLink={project.demoLink}
-            repoLink={project.repoLink}
-            image={project.image}
-            onDelete={fetchProjects}
-          />
-        ))}
-      </div>
+      ) : (
+        <div className="projects__container container grid">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              id={project.id}
+              title={project.title}
+              description={project.description}
+              technologies={project.technologies}
+              demoLink={project.demoLink}
+              repoLink={project.repoLink}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

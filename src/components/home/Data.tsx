@@ -1,4 +1,3 @@
-
 import { useTheme } from "../../hooks/useTheme";
 
 const Data = () => {
@@ -57,10 +56,13 @@ const Data = () => {
           ></path>
         </svg>
       </h1>
-
-      <p className="home__subtitle">Software Engineer</p>
+      <div className="home__subtitle-container">
+        <div className="divider" />
+        <p className="home__subtitle">Software Engineer</p>
+      </div>
       <p className="home__description">
-      A little imagination, a lot of ambition, and just the right amount of caffeine<span style={{ color: theme.primary }}>....a lot!</span>
+        Developer. Designer.{" "}
+        <span style={{ color: theme.primary }}>Problem solver.</span>
       </p>
     </div>
   );

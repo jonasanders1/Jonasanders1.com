@@ -1,7 +1,8 @@
 .section__title-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .section__title-container-inner {
@@ -10,12 +11,19 @@
 }
 
 .section__title {
-  font-size: var(--h1-font-size);
+  font-size: 2rem;
+  color: var(--color-title);
 }
 
 .section__subtitle {
-  display: block;
-  font-size: var(--small-font-size);
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+}
+
+.section__buttons-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .section__button {
@@ -35,4 +43,17 @@
 .section__title,
 .section__subtitle {
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .section__title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .section__buttons-container {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }

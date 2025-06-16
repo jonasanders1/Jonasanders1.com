@@ -3,8 +3,11 @@ import "./qualification.css";
 import { qualificationData } from "./qualificationData";
 import { QualificationItem } from "../../types";
 import SectionTitle from "../SectionTitle/SectionTitle";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Qualification = () => {
+  const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index: number) => {
@@ -40,7 +43,13 @@ const Qualification = () => {
 
   return (
     <section className="qualification section" id="qualification">
-      <SectionTitle title="Qualification" subtitle="My personal journey" button={true} buttonPath="/addnewqualification" />
+      <SectionTitle title="Qualification" subtitle="My personal journey" buttons={[
+        {
+          icon: faPlus,
+          onClick: () => navigate("/addnewqualification"),
+          variant: "add",
+        },
+      ]} />
 
       <div className="qualification__container container">
         <div className="qualification__tabs">

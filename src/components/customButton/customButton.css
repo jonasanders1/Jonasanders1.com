@@ -1,6 +1,6 @@
 /* Base button styles */
 .button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.5rem;
   border: none;
@@ -9,6 +9,7 @@
   cursor: pointer !important; /* Force cursor */
   transition: all 0.3s ease;
 }
+
 
 /* Size variants */
 .button--small {
