@@ -1,6 +1,7 @@
 .section__title-container {
   display: flex;
   justify-content: space-between;
+  border: 1px solid red;
   align-items: center;
   margin-bottom: 2rem;
 }

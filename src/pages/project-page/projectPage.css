@@ -4,69 +4,8 @@
   padding-top: 5rem;
 }
 
-.project-page__header {
-  max-width: 1200px;
-  margin: 0 auto 3rem;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.project-page__back-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  border: none;
-  background: none;
-  color: var(--color-text);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 6px;
-}
-
-.project-page__back-button:hover {
-  color: var(--color-primary);
-  background-color: var(--color-container);
-}
-
-.project-page__actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.project-page__action-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  background: none;
-  color: var(--color-text);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.project-page__action-button:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-button-text);
-}
-
-.project-page__action-button.deleting {
-  background-color: var(--color-error);
-  border-color: var(--color-error);
-  color: white;
-}
-
 .project-page__content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin-top: 5rem;
 }
 
 .project-page__grid {

@@ -121,28 +121,30 @@ const ProjectPage = () => {
 
   return (
     <div className="project-page container">
-      <SectionTitle
-        title={project.title}
-        backButton={true}
-        buttons={
-          isLoggedIn
-            ? [
-                {
-                  icon: faPen,
-                  onClick: handleEdit,
-                  variant: "primary",
-                  color: "var(--color-warning)",
-                },
-                {
-                  icon: faTrash,
-                  onClick: handleDelete,
-                  variant: "primary",
-                  color: "var(--color-error)",
-                },
-              ]
-            : []
-        }
-      />
+      <div className="project-page__header">
+        <SectionTitle
+          title={project.title}
+          backButton={true}
+          buttons={
+            isLoggedIn
+              ? [
+                  {
+                    icon: faPen,
+                    onClick: handleEdit,
+                    variant: "primary",
+                    color: "var(--color-warning)",
+                  },
+                  {
+                    icon: faTrash,
+                    onClick: handleDelete,
+                    variant: "primary",
+                    color: "var(--color-error)",
+                  },
+                ]
+              : []
+          }
+        />
+      </div>
 
       <div className="project-page__content">
         <div className="project-page__grid">
@@ -213,7 +215,6 @@ const ProjectPage = () => {
 
             <div className="project-page__top-content">
               <div className="project-page__technologies">
-                <h2>Technologies Used</h2>
                 <div className="project-page__tech-list">
                   {project.technologies.map((tech, index) => (
                     <span key={index} className="project-page__tech-item">
