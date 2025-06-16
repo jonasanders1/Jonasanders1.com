@@ -123,6 +123,10 @@ a.button {
     width: 22px;
     height: 22px;
   }
+  .button--add {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 /* Link style cursor */
