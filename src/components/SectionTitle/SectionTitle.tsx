@@ -10,7 +10,7 @@ type ButtonConfig = {
   icon: IconDefinition;
   onClick: () => void;
   variant?: "primary" | "secondary" | "add" | "text" | "outline";
-  size?: "small" | "large";
+  size?: "small" | "medium" | "large";
   label?: string;
   color?: string;
 };
@@ -20,6 +20,7 @@ type SectionTitleProps = {
   subtitle?: string;
   buttons?: ButtonConfig[];
   backButton?: boolean;
+  useContainer?: boolean;
 };
 
 const SectionTitle = ({
@@ -27,15 +28,18 @@ const SectionTitle = ({
   subtitle,
   buttons,
   backButton,
+  useContainer = true,
 }: SectionTitleProps) => {
   const isLoggedIn = useAuthStatus();
   const navigate = useNavigate();
   return (
-    <div className="section__title-container container">
+    <div
+      className={`section__title-container ${useContainer ? "container" : ""}`}
+    >
       {backButton && (
         <CustomButton
           variant="primary"
-          size="small"
+          size="medium"
           onClick={() => navigate("/")}
         >
           <FontAwesomeIcon icon={faArrowLeft} />

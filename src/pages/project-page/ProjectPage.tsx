@@ -125,18 +125,21 @@ const ProjectPage = () => {
         <SectionTitle
           title={project.title}
           backButton={true}
+          useContainer={false}
           buttons={
             isLoggedIn
               ? [
                   {
                     icon: faPen,
                     onClick: handleEdit,
+                    size: "small",
                     variant: "primary",
                     color: "var(--color-warning)",
                   },
                   {
                     icon: faTrash,
                     onClick: handleDelete,
+                    size: "small",
                     variant: "primary",
                     color: "var(--color-error)",
                   },

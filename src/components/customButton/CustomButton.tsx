@@ -2,7 +2,7 @@ import "./customButton.css";
 
 interface CustomButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'add';
-  size?: 'small' | 'large';
+  size?: 'small' | 'medium' | 'large';
   icon?: React.ReactNode;
   isLink?: boolean;
   href?: string;

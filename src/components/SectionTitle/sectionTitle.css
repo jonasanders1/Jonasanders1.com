@@ -1,7 +1,6 @@
 .section__title-container {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
   margin-bottom: 2rem;
 }
@@ -23,7 +22,7 @@
 
 .section__buttons-container {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
