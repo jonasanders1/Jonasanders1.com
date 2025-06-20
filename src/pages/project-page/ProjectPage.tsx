@@ -206,7 +206,7 @@ const ProjectPage = () => {
             {project.images && project.images.length > 0 ? (
               <>
                 <img
-                  src={project.images[currentImageIndex]}
+                  src={preloadedImages[currentImageIndex]?.src || project.images[currentImageIndex]}
                   alt={`${project.title} - Image ${currentImageIndex + 1}`}
                   style={{ opacity: isImageLoading ? 0 : 1 }}
                 />
@@ -243,7 +243,7 @@ const ProjectPage = () => {
               </>
             ) : project.image ? (
               <img
-                src={project.image}
+                src={preloadedImages[0]?.src || project.image}
                 alt={project.title}
                 style={{ opacity: isImageLoading ? 0 : 1 }}
               />
