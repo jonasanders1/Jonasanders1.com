@@ -1,0 +1,55 @@
+/* Loading Spinner Component */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+
+.loading-spinner__text {
+  color: var(--color-text);
+  font-size: var(--normal-font-size);
+  margin: 0;
+  text-align: center;
+}
+
+.loading-spinner__icon {
+  font-size: 2rem;
+  color: var(--color-primary);
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner--small .loading-spinner__text {
+  font-size: var(--smaller-font-size);
+}
+
+
+
+
+
+.loading-spinner--large .loading-spinner__text {
+  font-size: var(--h3-font-size);
+}
+
+/* Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .loading-spinner {
+    padding: 1.5rem;
+    gap: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .loading-spinner {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+} 

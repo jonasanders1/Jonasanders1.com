@@ -4,21 +4,22 @@
   --color-container-light: #ffffff;
   --color-title-light: #333333;
   --color-text-light: #555555;
-  --color-primary-light: #0078D7;
-  --color-hover-light: #005A9E;
-  --color-button-light: #0078D7;
+  --color-primary-light: #0078d7;
+  --color-hover-light: #005a9e;
+  --color-button-light: #0078d7;
   --color-button-text-light: #ffffff;
-  
-  /* Dark theme colors */
-  --color-body-dark: #1E1E1E;
-  --color-container-dark: #2E2E2E;
-  --color-title-dark: #ffffff;
-  --color-text-dark: #D1D1D1;
-  --color-primary-dark: #f7e02a;
-  --color-hover-dark: #985EFF;
-  --color-button-dark: #BB86FC;
-  --color-button-text-dark: #1E1E1E;
+  --color-tag-bg-light: #e6e6e6;
 
+  /* Dark theme colors */
+  --color-body-dark: #1e1e1e;
+  --color-container-dark: #2e2e2e;
+  --color-title-dark: #ffffff;
+  --color-text-dark: #d1d1d1;
+  --color-primary-dark: #f7e02a;
+  --color-hover-dark: #985eff;
+  --color-button-dark: #bb86fc;
+  --color-button-text-dark: #1e1e1e;
+  --color-tag-bg-dark: #515151;
   /* Active theme colors (defaults to light) */
   --color-body: var(--color-body-light);
   --color-container: var(--color-container-light);
@@ -28,12 +29,12 @@
   --color-hover: var(--color-hover-light);
   --color-button: var(--color-button-light);
   --color-button-text: var(--color-button-text-light);
-
+  --color-tag-bg: var(--color-tag-bg-light);
   /* Additional UI colors */
-  --color-success: #4CAF50;
+  --color-success: #4caf50;
   --color-error: #f44336;
   --color-warning: #ff9800;
-  --color-info: #2196F3;
+  --color-info: #2196f3;
 
   /* Border colors */
   --color-border: rgba(0, 0, 0, 0.1);
@@ -51,16 +52,24 @@
   --color-button: var(--color-button-dark);
   --color-button-text: var(--color-button-text-dark);
   --color-border: var(--color-border-dark);
+  --color-tag-bg: var(--color-tag-bg-dark);
 }
 
 /* Base styles for common elements */
-body {
+body,
+html {
   background-color: var(--color-body);
   color: var(--color-text);
+  
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-title);
 }
 
@@ -76,7 +85,6 @@ a {
 a:hover {
   color: var(--color-primary);
 }
-
 
 /** Header **/
 .header {
@@ -95,33 +103,27 @@ a:hover {
   background-color: var(--color-body);
 }
 
-
-
-
 /** Projects **/
 .project__content {
   background-color: var(--color-container);
 }
-.project__link{
+.project__link {
   background-color: var(--color-title);
   color: var(--color-container);
 }
-.project__link:hover{
+.project__link:hover {
   background-color: var(--color-primary);
   color: var(--color-container);
 }
-.project__technology{
+.project__technology {
   background-color: var(--color-body);
   color: var(--color-text);
 }
 
 /** Skills **/
-.skills__content{
+.skills__content {
   background-color: var(--color-container);
 }
-
-
-
 
 /* Cards/Containers */
 .card {
@@ -132,20 +134,29 @@ a:hover {
 }
 
 /* Form elements */
-input, textarea {
+input,
+textarea {
   background-color: var(--color-container);
   border: 1px solid var(--color-border);
   color: var(--color-text);
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: var(--color-primary);
   outline: none;
 }
 
 /* Status colors */
-.text-success { color: var(--color-success); }
-.text-error { color: var(--color-error); }
-.text-warning { color: var(--color-warning); }
-.text-info { color: var(--color-info); }
-
+.text-success {
+  color: var(--color-success);
+}
+.text-error {
+  color: var(--color-error);
+}
+.text-warning {
+  color: var(--color-warning);
+}
+.text-info {
+  color: var(--color-info);
+}

@@ -7,7 +7,11 @@ import "./projectForm.css";
 import { uploadProjectImage } from "../../firebaseConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from "../customButton/CustomButton";
-import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import FormField from "./FormField";
+import ImagePreview from "./ImagePreview";
+import TechnologyInput from "./TechnologyInput";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 interface ProjectFormData {
   title: string;
@@ -16,6 +20,7 @@ interface ProjectFormData {
   repoLink: string;
   technologies: string[];
   images?: string[];
+  createdAt?: Date;
 }
 
 const ProjectForm = () => {
@@ -28,9 +33,9 @@ const ProjectForm = () => {
     repoLink: "",
     technologies: [],
     images: [],
+    createdAt: new Date(),
   });
   const [newImages, setNewImages] = useState<File[]>([]);
-  const [tag, setTag] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(!!projectId);
 
@@ -44,6 +49,36 @@ const ProjectForm = () => {
         const projectDoc = await getDoc(doc(db, "projects", projectId));
         if (projectDoc.exists()) {
           const projectData = projectDoc.data() as ProjectFormData;
+          
+          // Handle date conversion safely
+          let createdAt: Date;
+          if (projectData.createdAt) {
+            try {
+              // Handle Firestore Timestamp or Date object
+              const dateValue = projectData.createdAt;
+              if (dateValue && typeof dateValue === 'object' && 'toDate' in dateValue) {
+                // Firestore Timestamp
+                createdAt = (dateValue as any).toDate();
+              } else if (dateValue instanceof Date) {
+                // Already a Date object
+                createdAt = dateValue;
+              } else {
+                // Try to create from string or timestamp
+                createdAt = new Date(dateValue);
+              }
+              
+              // Validate the date
+              if (isNaN(createdAt.getTime())) {
+                createdAt = new Date();
+              }
+            } catch (error) {
+              console.warn('Invalid date, using current date:', error);
+              createdAt = new Date();
+            }
+          } else {
+            createdAt = new Date();
+          }
+
           setFormData({
             title: projectData.title,
             description: projectData.description,
@@ -51,6 +86,7 @@ const ProjectForm = () => {
             repoLink: projectData.repoLink || "",
             technologies: projectData.technologies || [],
             images: projectData.images || [],
+            createdAt: createdAt,
           });
         }
       } catch (error) {
@@ -75,21 +111,17 @@ const ProjectForm = () => {
     }));
   };
 
-  const handleAddTag = () => {
-    if (tag.trim() !== "" && !formData.technologies.includes(tag)) {
-      setFormData((prev) => ({
-        ...prev,
-        technologies: [...prev.technologies, tag],
-      }));
-      setTag("");
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value) {
+      const newDate = new Date(value);
+      if (!isNaN(newDate.getTime())) {
+        setFormData((prev) => ({
+          ...prev,
+          createdAt: newDate,
+        }));
+      }
     }
-  };
-
-  const handleRemoveTag = (tagToRemove: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      technologies: prev.technologies.filter((t) => t !== tagToRemove),
-    }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,15 +131,29 @@ const ProjectForm = () => {
     }
   };
 
-  const handleRemoveImage = (index: number, isNewImage: boolean) => {
-    if (isNewImage) {
-      setNewImages((prev) => prev.filter((_, i) => i !== index));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        images: prev.images?.filter((_, i) => i !== index) || [],
-      }));
-    }
+  const handleRemoveExistingImage = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images?.filter((_, i) => i !== index) || [],
+    }));
+  };
+
+  const handleRemoveNewImage = (index: number) => {
+    setNewImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleAddTechnology = (tech: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      technologies: [...prev.technologies, tech],
+    }));
+  };
+
+  const handleRemoveTechnology = (tech: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      technologies: prev.technologies.filter((t) => t !== tech),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -127,7 +173,7 @@ const ProjectForm = () => {
         ...(formData.repoLink.trim() && { repoLink: formData.repoLink }),
         technologies: formData.technologies,
         images: [...(formData.images || []), ...uploadedImageUrls],
-        ...(isEditMode ? {} : { createdAt: new Date() }),
+        createdAt: formData.createdAt || new Date(),
       };
 
       if (isEditMode && projectId) {
@@ -151,6 +197,9 @@ const ProjectForm = () => {
     return (
       <section className="section">
         <SectionTitle title="Loading..." subtitle="Fetching project details" />
+        <div className="container">
+          <LoadingSpinner />
+        </div>
       </section>
     );
   }
@@ -167,156 +216,93 @@ const ProjectForm = () => {
         backButton={true}
       />
 
-      <div className="add-new-project__content container">
-        <form className="add-new-project__form" onSubmit={handleSubmit}>
-          <div className="add-new-project__form-div">
-            <label className="add-new-project__form-tag">Title</label>
-            <input
+      <div className="container">
+        <form className="project-form" onSubmit={handleSubmit}>
+          {/* Project Title */}
+          <FormField
+            label="Title"
+            name="title"
+            type="text"
+            value={formData.title}
+            onChange={handleInputChange}
+            placeholder="Project Title"
+            required
+          />
+
+          {/* Project Date */}
+          <FormField
+            label="Project Date"
+            name="createdAt"
+            type="date"
+            value={formData.createdAt && !isNaN(formData.createdAt.getTime()) 
+              ? formData.createdAt.toISOString().split('T')[0] 
+              : new Date().toISOString().split('T')[0]
+            }
+            onDateChange={handleDateChange}
+            required
+          />
+
+          {/* Project Images */}
+          <FormField
+            label="Project Images"
+            name="images"
+            type="file"
+            onFileChange={handleImageChange}
+            accept="image/*"
+            multiple
+          >
+            <ImagePreview
+              title="Existing Images"
+              images={formData.images || []}
+              onRemove={handleRemoveExistingImage}
+            />
+            <ImagePreview
+              title="New Images"
+              images={newImages}
+              onRemove={handleRemoveNewImage}
+            />
+          </FormField>
+
+          {/* Project Description */}
+          <FormField
+            label="Description"
+            name="description"
+            type="textarea"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Project Description"
+            required
+          />
+
+          {/* Project Links */}
+          <div className="form-row">
+            <FormField
+              label="Demo Link (Optional)"
+              name="demoLink"
               type="text"
-              name="title"
-              className="add-new-project__form-input"
-              value={formData.title}
+              value={formData.demoLink}
               onChange={handleInputChange}
-              placeholder="Project Title"
-              required
+              placeholder="Live demo URL"
             />
-          </div>
-
-          <div className="add-new-project__form-div">
-            <label className="add-new-project__form-tag">Project Images</label>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              className="add-new-project__form-input"
-              onChange={handleImageChange}
-              placeholder="Choose images..."
-            />
-
-            {/* Preview of existing images */}
-            {formData.images && formData.images.length > 0 && (
-              <div className="add-new-project__image-preview">
-                <h4>Existing Images</h4>
-                <div className="add-new-project__image-grid">
-                  {formData.images.map((imageUrl, index) => (
-                    <div
-                      key={`existing-${index}`}
-                      className="add-new-project__image-item"
-                    >
-                      <img src={imageUrl} alt={`Preview ${index + 1}`} />
-                      <button
-                        type="button"
-                        className="add-new-project__image-remove"
-                        onClick={() => handleRemoveImage(index, false)}
-                        aria-label="Remove image"
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Preview of new images */}
-            {newImages.length > 0 && (
-              <div className="add-new-project__image-preview">
-                <h4>New Images</h4>
-                <div className="add-new-project__image-grid">
-                  {newImages.map((image, index) => (
-                    <div
-                      key={`new-${index}`}
-                      className="add-new-project__image-item"
-                    >
-                      <img
-                        src={URL.createObjectURL(image)}
-                        alt={`New Preview ${index + 1}`}
-                      />
-                      <button
-                        type="button"
-                        className="add-new-project__image-remove"
-                        onClick={() => handleRemoveImage(index, true)}
-                        aria-label="Remove image"
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="add-new-project__form-div add-new-project__form-area">
-            <label className="add-new-project__form-tag">Description</label>
-            <textarea
-              name="description"
-              className="add-new-project__form-input"
-              value={formData.description}
+            <FormField
+              label="Repository Link (Optional)"
+              name="repoLink"
+              type="text"
+              value={formData.repoLink}
               onChange={handleInputChange}
-              placeholder="Project Description"
-              required
+              placeholder="GitHub repository URL"
             />
           </div>
 
-          <div className="add-new-project__form-links">
-            <div className="add-new-project__form-div">
-              <span className="add-new-project__form-tag">
-                Demo Link (Optional)
-              </span>
-              <input
-                type="text"
-                name="demoLink"
-                value={formData.demoLink}
-                onChange={handleInputChange}
-                className="add-new-project__form-input"
-                placeholder="Live demo URL"
-              />
-            </div>
+          {/* Technologies */}
+          <TechnologyInput
+            technologies={formData.technologies}
+            onAddTechnology={handleAddTechnology}
+            onRemoveTechnology={handleRemoveTechnology}
+          />
 
-            <div className="add-new-project__form-div">
-              <span className="add-new-project__form-tag">
-                Repository Link (Optional)
-              </span>
-              <input
-                type="text"
-                name="repoLink"
-                value={formData.repoLink}
-                onChange={handleInputChange}
-                className="add-new-project__form-input"
-                placeholder="GitHub repository URL"
-              />
-            </div>
-          </div>
-
-          <div className="add-new-project__form-div">
-            <label className="add-new-project__form-tag">Technologies</label>
-            <div className="add-new-project__form-tags">
-              <input
-                type="text"
-                className="add-new-project__form-input"
-                value={tag}
-                onChange={(e) => setTag(e.target.value)}
-                placeholder="Add technology (Press Enter)"
-                onKeyPress={(e) =>
-                  e.key === "Enter" && (e.preventDefault(), handleAddTag())
-                }
-              />
-              <div className="project__technologies">
-                {formData.technologies.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="project__technology"
-                    onClick={() => handleRemoveTag(tag)}
-                  >
-                    {tag} ×
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="add-new-project__form-button">
+          {/* Form Actions */}
+          <div className="form-actions">
             <CustomButton
               size="large"
               icon={<FontAwesomeIcon icon={faSave} />}

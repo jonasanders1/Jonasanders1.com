@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import {
   faPen,
   faTrash,
@@ -10,13 +11,14 @@ import {
   faExternalLink,
   faChevronLeft,
   faChevronRight,
-  faSpinner,
+  faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import CustomButton from "../../components/customButton/CustomButton";
 import "./projectPage.css";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
+import Tag from "../../components/tag/Tag";
 
 interface Project {
   id: string;
@@ -27,6 +29,7 @@ interface Project {
   repoLink?: string;
   images?: string[];
   image?: string;
+  createdAt?: Date;
 }
 
 const ProjectPage = () => {
@@ -36,7 +39,42 @@ const ProjectPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>(
+    []
+  );
   const isLoggedIn = useAuthStatus();
+
+  // Helper function to format date
+  const formatDate = (dateValue: any): string => {
+    try {
+      const date = dateValue?.toDate?.() || new Date(dateValue);
+      return isNaN(date.getTime()) ? 'Invalid Date' : 
+        date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch {
+      return 'Invalid Date';
+    }
+  };
+
+  // Preload all images
+  const preloadImages = async (imageUrls: string[]) => {
+    const imagePromises = imageUrls.map((url) => {
+      return new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+        img.src = url;
+      });
+    });
+
+    try {
+      const images = await Promise.all(imagePromises);
+      setPreloadedImages(images);
+      setIsImageLoading(false);
+    } catch (error) {
+      console.error("Error preloading images:", error);
+      setIsImageLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -45,7 +83,23 @@ const ProjectPage = () => {
       try {
         const projectDoc = await getDoc(doc(db, "projects", projectId));
         if (projectDoc.exists()) {
-          setProject({ id: projectDoc.id, ...projectDoc.data() } as Project);
+          const projectData = {
+            id: projectDoc.id,
+            ...projectDoc.data(),
+          } as Project;
+          setProject(projectData);
+
+          // Preload images if they exist
+          if (projectData.images && projectData.images.length > 0) {
+            setIsImageLoading(true);
+            await preloadImages(projectData.images);
+          } else if (projectData.image) {
+            // Single image case
+            setIsImageLoading(true);
+            await preloadImages([projectData.image]);
+          } else {
+            setIsImageLoading(false);
+          }
         } else {
           navigate("/");
         }
@@ -60,11 +114,6 @@ const ProjectPage = () => {
 
     fetchProject();
   }, [projectId, navigate]);
-
-  // Reset image loading state when image changes
-  // useEffect(() => {
-  //   setIsImageLoading(true);
-  // }, [currentImageIndex, project?.images, project?.image]);
 
   const handleDelete = async () => {
     if (
@@ -101,15 +150,11 @@ const ProjectPage = () => {
     );
   };
 
-  const handleImageLoad = () => {
-    setIsImageLoading(false);
-  };
-
   if (isLoading) {
     return (
       <div className="project-page">
         <div className="project-page__loading">
-          <h2>Loading project details...</h2>
+          <LoadingSpinner text="Loading project details..." size="large" />
         </div>
       </div>
     );
@@ -123,7 +168,7 @@ const ProjectPage = () => {
     <div className="project-page container">
       <div className="project-page__header">
         <SectionTitle
-          title={project.title}
+          title=""
           backButton={true}
           useContainer={false}
           buttons={
@@ -150,95 +195,104 @@ const ProjectPage = () => {
       </div>
 
       <div className="project-page__content">
-        <div className="project-page__grid">
-          <div className="project-page__top-section">
-            <div className="project-page__hero">
-              <div className="project-page__image">
-                {isImageLoading && (
-                  <div className="project-page__image-loading">
-                    <FontAwesomeIcon icon={faSpinner} spin size="2x" />
-                    <span>Loading image...</span>
-                  </div>
-                )}
-                {project.images && project.images.length > 0 ? (
+        {/* Hero Image */}
+        <div className="project-page__hero">
+          <div className="project-page__image">
+            {isImageLoading && (
+              <div className="project-page__image-loading">
+                <LoadingSpinner size="small" text="Loading images..." />
+              </div>
+            )}
+            {project.images && project.images.length > 0 ? (
+              <>
+                <img
+                  src={project.images[currentImageIndex]}
+                  alt={`${project.title} - Image ${currentImageIndex + 1}`}
+                  style={{ opacity: isImageLoading ? 0 : 1 }}
+                />
+                {project.images.length > 1 && (
                   <>
-                    <img
-                      src={project.images[currentImageIndex]}
-                      alt={`${project.title} - Image ${currentImageIndex + 1}`}
-                      loading="lazy"
-                      onLoad={handleImageLoad}
-                      style={{ opacity: isImageLoading ? 0 : 1 }}
-                    />
-                    {project.images.length > 1 && (
-                      <>
+                    <button
+                      className="project-page__carousel-button project-page__carousel-button--prev"
+                      onClick={handlePreviousImage}
+                      aria-label="Previous image"
+                    >
+                      <FontAwesomeIcon icon={faChevronLeft} />
+                    </button>
+                    <button
+                      className="project-page__carousel-button project-page__carousel-button--next"
+                      onClick={handleNextImage}
+                      aria-label="Next image"
+                    >
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </button>
+                    <div className="project-page__carousel-indicators">
+                      {project.images.map((_, index) => (
                         <button
-                          className="project-page__carousel-button project-page__carousel-button--prev"
-                          onClick={handlePreviousImage}
-                          aria-label="Previous image"
-                        >
-                          <FontAwesomeIcon icon={faChevronLeft} />
-                        </button>
-                        <button
-                          className="project-page__carousel-button project-page__carousel-button--next"
-                          onClick={handleNextImage}
-                          aria-label="Next image"
-                        >
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </button>
-                        <div className="project-page__carousel-indicators">
-                          {project.images.map((_, index) => (
-                            <button
-                              key={index}
-                              className={`project-page__carousel-indicator ${
-                                index === currentImageIndex ? "active" : ""
-                              }`}
-                              onClick={() => setCurrentImageIndex(index)}
-                              aria-label={`Go to image ${index + 1}`}
-                            />
-                          ))}
-                        </div>
-                      </>
-                    )}
+                          key={index}
+                          className={`project-page__carousel-indicator ${
+                            index === currentImageIndex ? "active" : ""
+                          }`}
+                          onClick={() => setCurrentImageIndex(index)}
+                          aria-label={`Go to image ${index + 1}`}
+                        />
+                      ))}
+                    </div>
                   </>
-                ) : project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    onLoad={handleImageLoad}
-                    style={{ opacity: isImageLoading ? 0 : 1 }}
-                  />
-                ) : (
-                  <div className="project-page__image-placeholder">
-                    <FontAwesomeIcon icon={faCode} size="3x" />
-                  </div>
                 )}
+              </>
+            ) : project.image ? (
+              <img
+                src={project.image}
+                alt={project.title}
+                style={{ opacity: isImageLoading ? 0 : 1 }}
+              />
+            ) : (
+              <div className="project-page__image-placeholder">
+                <FontAwesomeIcon icon={faCode} size="3x" />
+                <p>No image available</p>
               </div>
-            </div>
+            )}
+          </div>
+        </div>
 
-            <div className="project-page__top-content">
-              <div className="project-page__technologies">
-                <div className="project-page__tech-list">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="project-page__tech-item">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+        {/* Project Content */}
+        <div className="project-page__content-wrapper">
+          {/* Project Header */}
+          <div className="project-page__header-section">
+            <h1 className="project-page__project-title">{project.title}</h1>
+            {project.createdAt && (
+              <div className="project-page__project-date">
+                <span><FontAwesomeIcon icon={faCalendar} color="var(--color-primary)" /> {formatDate(project.createdAt)}</span>
               </div>
+            )}
+          </div>
+         
+          {/* Technologies */}
+          <div className="project-page__technologies-section">
+          
+            <div className="project-page__tech-list">
+              {project.technologies.map((tech, index) => (
+                <Tag key={index} tech={tech} />
+              ))}
             </div>
           </div>
 
-          <div className="project-page__description">
-            <h2>About the Project</h2>
-            <p>{project.description}</p>
+          {/* Project Description */}
+          <div className="project-page__description-section">
+            <h2 className="project-page__description-title">
+              About the Project
+            </h2>
+            <p className="project-page__description-text">
+              {project.description}
+            </p>
           </div>
 
-          <div className="project-page__links">
+          <div className="project-page__project-links">
             {project.demoLink && (
               <CustomButton
-                variant="primary"
-                size="large"
+                variant="secondary"
+                size="small"
                 href={project.demoLink}
                 icon={<FontAwesomeIcon icon={faExternalLink} />}
                 isLink={true}
@@ -250,7 +304,7 @@ const ProjectPage = () => {
             {project.repoLink && (
               <CustomButton
                 variant="secondary"
-                size="large"
+                size="small"
                 href={project.repoLink}
                 icon={<FontAwesomeIcon icon={faGithub} />}
                 isLink={true}

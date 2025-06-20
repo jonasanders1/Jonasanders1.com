@@ -59,6 +59,7 @@ const Data = () => {
       <div className="home__subtitle-container">
         <div className="divider" />
         <p className="home__subtitle">Software Engineer</p>
+        <div className="divider" />
       </div>
       <p className="home__description">
         Developer. Designer.{" "}

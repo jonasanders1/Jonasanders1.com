@@ -72,11 +72,11 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: var(--color-body);
   color: var(--color-text);
   min-height: 100vh; /* This ensures minimum full viewport height */
   font-family: var(--body-font);

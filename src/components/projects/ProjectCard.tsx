@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import "./projects.css";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../customButton/CustomButton";
+import Tag from "../tag/Tag";
 
 interface ProjectCardProps {
   id: string;
@@ -31,33 +32,34 @@ const ProjectCard = ({
   return (
     <div className="project__card" onClick={handleView}>
       <div className="project__content">
-        <h3 className="project__title">{title}</h3>
+        <div className="project__title-container">
+          <h3 className="project__title">{title}</h3>
+          <FontAwesomeIcon icon={faArrowRight} className="project__arrow" />
+        </div>
         <p className="project__description">{description}</p>
 
         <div className="project__footer">
           <div className="project__technologies">
             {technologies.map((technology, index) => (
-              <span key={index} className="project__technology">
-                {technology}
-              </span>
+              <Tag key={index} tech={technology} />
             ))}
           </div>
           <div className="project__links">
             {demoLink && (
               <CustomButton
-                variant="secondary"
+                variant="primary"
                 size="small"
                 href={demoLink}
-                icon={<FontAwesomeIcon icon={faArrowRight} />}
+                icon={<FontAwesomeIcon icon={faExternalLink} />}
                 isLink={true}
               >
                 Live Demo
               </CustomButton>
             )}
-            
+
             {repoLink && (
               <CustomButton
-                variant="secondary"
+                variant="primary"
                 size="small"
                 href={repoLink}
                 icon={<FontAwesomeIcon icon={faGithub} />}

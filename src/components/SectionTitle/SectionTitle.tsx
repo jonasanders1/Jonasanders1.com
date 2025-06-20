@@ -39,7 +39,7 @@ const SectionTitle = ({
       {backButton && (
         <CustomButton
           variant="primary"
-          size="medium"
+          size="small"
           onClick={() => navigate("/")}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
