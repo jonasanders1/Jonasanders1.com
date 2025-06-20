@@ -36,30 +36,16 @@ export const handleGithubSignIn = async (
 ) => {
   try {
     const result = await signInWithPopup(auth, githubProvider);
-    const credential = GithubAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-
-    if (!token) {
-      console.error("No access token available");
+    const user = result.user;
+    
+    // Get the GitHub user ID from the Firebase user object
+    const githubUserId = user.providerData[0]?.uid;
+    
+    if (!githubUserId) {
+      console.error("No GitHub user ID available");
       setLoginFailed(true);
       return;
     }
-
-    // Fetch user data from GitHub API
-    const response = await fetch("https://api.github.com/user", {
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      console.error("Failed to fetch GitHub user data");
-      setLoginFailed(true);
-      return;
-    }
-
-    const githubUser = await response.json();
-    const githubUsername = githubUser.login;
 
     // Check if the environment variable is loaded
     if (!import.meta.env.VITE_GITHUB_ADMIN_USERNAME) {
@@ -70,13 +56,11 @@ export const handleGithubSignIn = async (
       return;
     }
 
-    if (
-      githubUsername ===
-      import.meta.env.VITE_GITHUB_ADMIN_USERNAME.toLowerCase()
-    ) {
+    // Compare the GitHub user ID with the stored admin user ID
+    if (githubUserId === import.meta.env.VITE_GITHUB_ADMIN_USERNAME) {
       navigate("/");
     } else {
-      console.log("Login failed - Username mismatch");
+      console.log("Login failed - User ID mismatch");
       await signOut(auth);
       setLoginFailed(true);
     }
