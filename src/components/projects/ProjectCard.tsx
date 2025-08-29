@@ -13,6 +13,7 @@ interface ProjectCardProps {
   technologies: string[];
   demoLink?: string;
   repoLink?: string;
+  isHighlighted?: boolean;
 }
 
 const ProjectCard = ({
@@ -22,6 +23,7 @@ const ProjectCard = ({
   technologies,
   demoLink,
   repoLink,
+  isHighlighted = false,
 }: ProjectCardProps) => {
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ const ProjectCard = ({
   };
 
   return (
-    <div className="project__card" onClick={handleView}>
+    <div className={`project__card ${isHighlighted ? 'highlighted' : ''}`} onClick={handleView}>
       <div className="project__content">
         <div className="project__title-container">
           <h3 className="project__title">{title}</h3>

@@ -14,6 +14,7 @@ interface Project {
   demoLink?: string;
   repoLink: string;
   image?: string;
+  isHighlighted?: boolean;
 }
 
 const Projects = () => {
@@ -33,7 +34,14 @@ const Projects = () => {
         ...doc.data(),
       })) as Project[];
 
-      setProjects(projectsList);
+      // Sort projects to show highlighted ones first
+      const sortedProjects = projectsList.sort((a, b) => {
+        if (a.isHighlighted && !b.isHighlighted) return -1;
+        if (!a.isHighlighted && b.isHighlighted) return 1;
+        return 0;
+      });
+
+      setProjects(sortedProjects);
     } catch (error) {
       console.error("Error fetching projects:", error);
     } finally {
@@ -92,6 +100,7 @@ const Projects = () => {
               technologies={project.technologies}
               demoLink={project.demoLink}
               repoLink={project.repoLink}
+              isHighlighted={project.isHighlighted}
             />
           ))}
         </div>

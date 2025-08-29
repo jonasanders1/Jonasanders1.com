@@ -21,6 +21,7 @@ interface ProjectFormData {
   technologies: string[];
   images?: string[];
   createdAt?: Date;
+  isHighlighted?: boolean;
 }
 
 const ProjectForm = () => {
@@ -34,6 +35,7 @@ const ProjectForm = () => {
     technologies: [],
     images: [],
     createdAt: new Date(),
+    isHighlighted: false,
   });
   const [newImages, setNewImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,14 +51,18 @@ const ProjectForm = () => {
         const projectDoc = await getDoc(doc(db, "projects", projectId));
         if (projectDoc.exists()) {
           const projectData = projectDoc.data() as ProjectFormData;
-          
+
           // Handle date conversion safely
           let createdAt: Date;
           if (projectData.createdAt) {
             try {
               // Handle Firestore Timestamp or Date object
               const dateValue = projectData.createdAt;
-              if (dateValue && typeof dateValue === 'object' && 'toDate' in dateValue) {
+              if (
+                dateValue &&
+                typeof dateValue === "object" &&
+                "toDate" in dateValue
+              ) {
                 // Firestore Timestamp
                 createdAt = (dateValue as any).toDate();
               } else if (dateValue instanceof Date) {
@@ -66,13 +72,13 @@ const ProjectForm = () => {
                 // Try to create from string or timestamp
                 createdAt = new Date(dateValue);
               }
-              
+
               // Validate the date
               if (isNaN(createdAt.getTime())) {
                 createdAt = new Date();
               }
             } catch (error) {
-              console.warn('Invalid date, using current date:', error);
+              console.warn("Invalid date, using current date:", error);
               createdAt = new Date();
             }
           } else {
@@ -87,6 +93,7 @@ const ProjectForm = () => {
             technologies: projectData.technologies || [],
             images: projectData.images || [],
             createdAt: createdAt,
+            isHighlighted: projectData.isHighlighted || false,
           });
         }
       } catch (error) {
@@ -174,6 +181,7 @@ const ProjectForm = () => {
         technologies: formData.technologies,
         images: [...(formData.images || []), ...uploadedImageUrls],
         createdAt: formData.createdAt || new Date(),
+        isHighlighted: formData.isHighlighted || false,
       };
 
       if (isEditMode && projectId) {
@@ -234,13 +242,36 @@ const ProjectForm = () => {
             label="Project Date"
             name="createdAt"
             type="date"
-            value={formData.createdAt && !isNaN(formData.createdAt.getTime()) 
-              ? formData.createdAt.toISOString().split('T')[0] 
-              : new Date().toISOString().split('T')[0]
+            value={
+              formData.createdAt && !isNaN(formData.createdAt.getTime())
+                ? formData.createdAt.toISOString().split("T")[0]
+                : new Date().toISOString().split("T")[0]
             }
             onDateChange={handleDateChange}
             required
           />
+
+          {/* Featured Project Toggle */}
+          <div className="form-field">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="isHighlighted"
+                checked={formData.isHighlighted || false}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    isHighlighted: e.target.checked,
+                  }))
+                }
+                className="checkbox-input"
+              />
+              <span className="checkbox-text">Mark as Featured Project</span>
+              <small className="checkbox-help">
+                Featured projects will be highlighted in the portfolio
+              </small>
+            </label>
+          </div>
 
           {/* Project Images */}
           <FormField
