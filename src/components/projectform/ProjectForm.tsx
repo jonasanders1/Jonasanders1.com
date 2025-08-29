@@ -21,6 +21,7 @@ interface ProjectFormData {
   technologies: string[];
   images?: string[];
   createdAt?: Date;
+  isHighlighted?: boolean;
 }
 
 const ProjectForm = () => {
@@ -34,6 +35,7 @@ const ProjectForm = () => {
     technologies: [],
     images: [],
     createdAt: new Date(),
+    isHighlighted: false,
   });
   const [newImages, setNewImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,6 +89,7 @@ const ProjectForm = () => {
             technologies: projectData.technologies || [],
             images: projectData.images || [],
             createdAt: createdAt,
+            isHighlighted: projectData.isHighlighted || false,
           });
         }
       } catch (error) {
@@ -174,6 +177,7 @@ const ProjectForm = () => {
         technologies: formData.technologies,
         images: [...(formData.images || []), ...uploadedImageUrls],
         createdAt: formData.createdAt || new Date(),
+        isHighlighted: formData.isHighlighted || false,
       };
 
       if (isEditMode && projectId) {
@@ -241,6 +245,21 @@ const ProjectForm = () => {
             onDateChange={handleDateChange}
             required
           />
+
+          {/* Featured Project Toggle */}
+          <div className="form-field">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="isHighlighted"
+                checked={formData.isHighlighted || false}
+                onChange={(e) => setFormData(prev => ({ ...prev, isHighlighted: e.target.checked }))}
+                className="checkbox-input"
+              />
+              <span className="checkbox-text">Mark as Featured Project</span>
+              <small className="checkbox-help">Featured projects will be highlighted in the portfolio</small>
+            </label>
+          </div>
 
           {/* Project Images */}
           <FormField
