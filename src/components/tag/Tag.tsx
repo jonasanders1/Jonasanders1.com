@@ -1,5 +1,3 @@
-import "./tag.css";
-
 type TagProps = {
   tech: string;
   onClick?: () => void;
@@ -7,8 +5,11 @@ type TagProps = {
 
 const Tag = ({ tech, onClick }: TagProps) => {
   return (
-    <div className="tag" onClick={onClick}>
-      <span className="tag__text">{tech}</span>
+    <div 
+      className="inline-flex items-center px-3 py-1 rounded-full bg-tag-bg-light dark:bg-tag-bg-dark text-text-light dark:text-text-dark text-sm font-medium transition-all hover:scale-105 cursor-pointer"
+      onClick={onClick}
+    >
+      <span>{tech}</span>
     </div>
   );
 };

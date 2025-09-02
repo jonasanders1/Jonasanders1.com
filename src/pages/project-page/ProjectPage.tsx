@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import CustomButton from "../../components/customButton/CustomButton";
-import "./projectPage.css";
+
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import Tag from "../../components/tag/Tag";

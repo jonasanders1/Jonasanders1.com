@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import themes from "../styles/theme";
 
 type Theme = "light" | "dark";
@@ -34,7 +33,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, themeName, theme: currentTheme }}>
-      <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
+      {children}
     </ThemeContext.Provider>
   );
 };

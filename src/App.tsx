@@ -1,6 +1,3 @@
-import "./App.css";
-// import "./styles/global.css";
-import "./styles/colors.css";
 import Header from "./components/header/Header";
 
 // Home page sections

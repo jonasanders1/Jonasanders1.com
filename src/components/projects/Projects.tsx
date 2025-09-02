@@ -21,6 +21,7 @@ const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  
   const fetchProjects = async () => {
     try {
       const projectsQuery = query(
@@ -54,43 +55,32 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="projects section" id="projects">
+    <section className="section" id="projects">
       <SectionTitle
         title="Projects"
-        subtitle="The projects I have worked on"
+        subtitle="A collection of my work"
         buttons={[
           {
             icon: faPlus,
             onClick: () => navigate("/addproject"),
             variant: "add",
+            label: "Add Project",
           },
         ]}
       />
 
       {isLoading ? (
-        <div className="projects__container container grid">
-          {[1, 2, 3, 4].map((index) => (
-            <div key={index} className="project__card skeleton">
-              <div className="project__content">
-                <div className="skeleton-title"></div>
-                <div className="skeleton-description"></div>
-                <div className="skeleton-description"></div>
-                <div className="skeleton-description"></div>
-                <div className="project__technologies">
-                  {[1, 2, 3].map((techIndex) => (
-                    <div key={techIndex} className="skeleton-tech"></div>
-                  ))}
-                </div>
-                <div className="skeleton-links">
-                  <div className="skeleton-button"></div>
-                  <div className="skeleton-button"></div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-light dark:border-primary-dark border-t-transparent"></div>
+        </div>
+      ) : projects.length === 0 ? (
+        <div className="container text-center py-16">
+          <p className="text-lg text-text-light dark:text-text-dark mb-8">
+            No projects available yet.
+          </p>
         </div>
       ) : (
-        <div className="projects__container container grid">
+        <div className="container grid grid-cols-2 gap-6 justify-center xl:grid-cols-1 xl:gap-8 lg:gap-5">
           {projects.map((project) => (
             <ProjectCard
               key={project.id}

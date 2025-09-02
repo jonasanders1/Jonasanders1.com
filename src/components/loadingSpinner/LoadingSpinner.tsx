@@ -1,5 +1,4 @@
 import React from "react";
-import "./loadingSpinner.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,13 +13,21 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = "medium",
   className = "",
 }) => {
+  const sizeClasses = {
+    small: "text-2xl",
+    medium: "text-4xl",
+    large: "text-6xl"
+  };
+  
   return (
-    <div className={`loading-spinner loading-spinner--${size} ${className}`}>
-      {/* <div className="loading-spinner__circle"></div> */}
-      <FontAwesomeIcon icon={faSpinner} className="loading-spinner__icon" />
-      {text && <p className="loading-spinner__text">{text}</p>}
+    <div className={`flex flex-col items-center justify-center gap-4 ${className}`}>
+      <FontAwesomeIcon 
+        icon={faSpinner} 
+        className={`animate-spin text-primary-light dark:text-primary-dark ${sizeClasses[size]}`} 
+      />
+      {text && <p className="text-text-light dark:text-text-dark">{text}</p>}
     </div>
   );
 };
 
-export default LoadingSpinner; 
+export default LoadingSpinner;

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./qualification.css";
 import { qualificationData } from "./qualificationData";
 import { QualificationItem } from "../../types";
 import SectionTitle from "../SectionTitle/SectionTitle";
@@ -19,82 +18,83 @@ const Qualification = () => {
       .filter((item) => item.type === type)
       .map((item: QualificationItem, index: number) => (
         <div
-          className={`qualification__data ${
-            index % 2 === 0
-              ? "qualification__data-left"
-              : "qualification__data-right"
+          className={`grid grid-cols-[1fr_max-content_1fr] gap-6 ${
+            index % 2 === 1 ? "rtl" : ""
           }`}
           key={item.id}
         >
-          <div>
-            <h3 className="qualification__title">{item.title}</h3>
-            <span className="qualification__subtitle">{item.subtitle}</span>
-            <div className="qualification__calender">
+          <div className={index % 2 === 1 ? "ltr" : ""}>
+            <h3 className="text-normal font-medium text-title-light dark:text-title-dark">
+              {item.title}
+            </h3>
+            <span className="inline-block text-smaller text-text-light dark:text-text-dark mb-4">
+              {item.subtitle}
+            </span>
+            <div className="flex items-center gap-1 text-smaller text-text-light dark:text-text-dark">
               <i className="uil uil-calendar-alt"></i> {item.calendar}
             </div>
           </div>
           <div>
-            <span className="qualification__rounder"></span>
-            <span className="qualification__line"></span>
+            <span className="inline-block w-[13px] h-[13px] bg-primary-light dark:bg-primary-dark rounded-full"></span>
+            {index !== qualificationData.filter(d => d.type === type).length - 1 && (
+              <span className="block w-[1px] h-full bg-primary-light dark:bg-primary-dark translate-x-[6px]"></span>
+            )}
           </div>
+          <div></div>
         </div>
       ));
   };
 
   return (
-    <section className="qualification section" id="qualification">
-      <SectionTitle title="Qualification" subtitle="My personal journey" buttons={[
-        {
-          icon: faPlus,
-          onClick: () => navigate("/addnewqualification"),
-          variant: "add",
-        },
-      ]} />
+    <section className="section mb-12" id="qualification">
+      <SectionTitle 
+        title="Qualification" 
+        subtitle="My personal journey" 
+        buttons={[
+          {
+            icon: faPlus,
+            onClick: () => navigate("/addnewqualification"),
+            variant: "add",
+          },
+        ]} 
+      />
 
-      <div className="qualification__container container">
-        <div className="qualification__tabs">
+      <div className="container max-w-container">
+        <div className="flex justify-center mb-8">
           <div
             onClick={() => toggleTab(1)}
-            className={
+            className={`text-h3 font-medium mx-4 cursor-pointer flex items-center transition-colors ${
               toggleState === 1
-                ? "qualification__button qualification__active button--flex"
-                : "qualification__button button--flex"
-            }
+                ? "text-primary-light dark:text-primary-dark"
+                : "text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark"
+            }`}
           >
-            <i className="uil uil-graduation-cap qualification__icon"></i>
+            <i className="uil uil-graduation-cap text-[1.8rem] mr-1"></i>
             Education
           </div>
 
           <div
             onClick={() => toggleTab(2)}
-            className={
+            className={`text-h3 font-medium mx-4 cursor-pointer flex items-center transition-colors ${
               toggleState === 2
-                ? "qualification__button qualification__active button--flex"
-                : "qualification__button button--flex"
-            }
+                ? "text-primary-light dark:text-primary-dark"
+                : "text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark"
+            }`}
           >
-            <i className="uil uil-briefcase-alt qualification__icon"></i>
+            <i className="uil uil-briefcase-alt text-[1.8rem] mr-1"></i>
             Experience
           </div>
         </div>
 
-        <div className="qualification__sections">
+        <div className="grid grid-cols-[0.5fr] justify-center">
           <div
-            className={
-              toggleState === 1
-                ? "qualification__content qualification__content-active"
-                : "qualification__content"
-            }
+            className={toggleState === 1 ? "block" : "hidden"}
           >
             {renderQualificationData("education")}
           </div>
 
           <div
-            className={
-              toggleState === 2
-                ? "qualification__content qualification__content-active"
-                : "qualification__content"
-            }
+            className={toggleState === 2 ? "block" : "hidden"}
           >
             {renderQualificationData("experience")}
           </div>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import SectionTitle from "../SectionTitle/SectionTitle";
-import "./projectForm.css";
+
 import { uploadProjectImage } from "../../firebaseConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton from "../customButton/CustomButton";

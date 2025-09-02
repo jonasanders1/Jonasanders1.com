@@ -6,7 +6,7 @@ import { useAuthStatus } from "../../hooks/useAuthStatus";
 import CustomButton from "../../components/customButton/CustomButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import "./logIn.css";
+
 import { useState } from "react";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 

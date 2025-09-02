@@ -1,17 +1,14 @@
 import Data from "./Data";
 import ScrollDown from "./ScrollDown";
 import Social from "./Social";
-import "./home.css";
 
 const Home = () => {
   return (
-    <section className="home section" id="home">
-      <div className="home__container container grid">
-        {/* <div className="home__content grid"> */}
-          <Social />
-          <Data />
-          <ScrollDown />
-        {/* </div> */}
+    <section className="section" id="home">
+      <div className="container h-[60vh] grid grid-cols-[50px_130px_1fr] grid-rows-2 place-items-center place-content-center lg:grid-cols-3 lg:grid-rows-[50px_1fr_150px] md:h-[75vh]">
+        <Social />
+        <Data />
+        <ScrollDown />
       </div>
     </section>
   );

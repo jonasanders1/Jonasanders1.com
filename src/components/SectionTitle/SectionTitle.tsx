@@ -1,5 +1,4 @@
 import { useAuthStatus } from "../../hooks/useAuthStatus";
-import "./sectionTitle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import CustomButton from "../customButton/CustomButton";
@@ -32,9 +31,10 @@ const SectionTitle = ({
 }: SectionTitleProps) => {
   const isLoggedIn = useAuthStatus();
   const navigate = useNavigate();
+  
   return (
     <div
-      className={`section__title-container ${useContainer ? "container" : ""}`}
+      className={`flex justify-between items-center mb-8 ${useContainer ? "container" : ""}`}
     >
       {backButton && (
         <CustomButton
@@ -45,13 +45,15 @@ const SectionTitle = ({
           <FontAwesomeIcon icon={faArrowLeft} />
         </CustomButton>
       )}
-      <div className="section__title-container-inner">
-        <h2 className="section__title">{title}</h2>
-        <span className="section__subtitle">{subtitle}</span>
+      <div className="flex-1 text-center">
+        <h2 className="text-[2rem] text-title-light dark:text-title-dark font-semi-bold">{title}</h2>
+        {subtitle && (
+          <span className="text-[1.1rem] text-text-light dark:text-text-dark opacity-80">{subtitle}</span>
+        )}
       </div>
 
       {isLoggedIn && buttons && buttons.length > 0 && (
-        <div className="section__buttons-container">
+        <div className="flex gap-2 items-center">
           {buttons.map((button, index) => (
             <CustomButton
               key={index}
