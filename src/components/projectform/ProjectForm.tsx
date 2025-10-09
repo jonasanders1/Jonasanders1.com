@@ -11,11 +11,13 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 import FormField from "./FormField";
 import ImagePreview from "./ImagePreview";
 import TechnologyInput from "./TechnologyInput";
+import MDEditor from "@uiw/react-md-editor";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 interface ProjectFormData {
   title: string;
   description: string;
+  markdownDescription: string;
   demoLink: string;
   repoLink: string;
   technologies: string[];
@@ -30,6 +32,7 @@ const ProjectForm = () => {
   const [formData, setFormData] = useState<ProjectFormData>({
     title: "",
     description: "",
+    markdownDescription: "",
     demoLink: "",
     repoLink: "",
     technologies: [],
@@ -88,6 +91,7 @@ const ProjectForm = () => {
           setFormData({
             title: projectData.title,
             description: projectData.description,
+            markdownDescription: projectData.markdownDescription,
             demoLink: projectData.demoLink || "",
             repoLink: projectData.repoLink || "",
             technologies: projectData.technologies || [],
@@ -176,6 +180,7 @@ const ProjectForm = () => {
       const projectData = {
         title: formData.title,
         description: formData.description,
+        markdownDescription: formData.markdownDescription,
         ...(formData.demoLink.trim() && { demoLink: formData.demoLink }),
         ...(formData.repoLink.trim() && { repoLink: formData.repoLink }),
         technologies: formData.technologies,
@@ -223,7 +228,7 @@ const ProjectForm = () => {
         }
         backButton={true}
       />
-
+  
       <div className="container">
         <form className="project-form" onSubmit={handleSubmit}>
           {/* Project Title */}
@@ -294,16 +299,19 @@ const ProjectForm = () => {
             />
           </FormField>
 
-          {/* Project Description */}
-          <FormField
-            label="Description"
-            name="description"
-            type="textarea"
-            value={formData.description}
-            onChange={handleInputChange}
-            placeholder="Project Description"
-            required
-          />
+          {/* Project Description (Markdown Editor) */}
+          <div className="form-field" data-color-mode="auto">
+              <FormField label="Description" name="description" type="text" onChange={handleInputChange} value={formData.description}/>
+          </div>
+          <div className="form-field" data-color-mode="auto">
+            <label className="form-field__label">Markdown description</label>
+            <MDEditor
+              value={formData.markdownDescription}
+              onChange={(val) =>
+                setFormData((prev) => ({ ...prev, markdownDescription: val || "" }))
+              }
+            />
+          </div>
 
           {/* Project Links */}
           <div className="form-row">

@@ -19,11 +19,14 @@ import "./projectPage.css";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import Tag from "../../components/tag/Tag";
+import MDEditor from "@uiw/react-md-editor";
+import { useTheme } from "../../hooks/useTheme";
 
 interface Project {
   id: string;
   title: string;
   description: string;
+  markdownDescription: string;
   technologies: string[];
   demoLink?: string;
   repoLink?: string;
@@ -43,15 +46,21 @@ const ProjectPage = () => {
     []
   );
   const isLoggedIn = useAuthStatus();
+  const { theme } = useTheme();
 
   // Helper function to format date
   const formatDate = (dateValue: any): string => {
     try {
       const date = dateValue?.toDate?.() || new Date(dateValue);
-      return isNaN(date.getTime()) ? 'Invalid Date' : 
-        date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      return isNaN(date.getTime())
+        ? "Invalid Date"
+        : date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
     } catch {
-      return 'Invalid Date';
+      return "Invalid Date";
     }
   };
 
@@ -206,7 +215,10 @@ const ProjectPage = () => {
             {project.images && project.images.length > 0 ? (
               <>
                 <img
-                  src={preloadedImages[currentImageIndex]?.src || project.images[currentImageIndex]}
+                  src={
+                    preloadedImages[currentImageIndex]?.src ||
+                    project.images[currentImageIndex]
+                  }
                   alt={`${project.title} - Image ${currentImageIndex + 1}`}
                   style={{ opacity: isImageLoading ? 0 : 1 }}
                 />
@@ -263,14 +275,19 @@ const ProjectPage = () => {
             <h1 className="project-page__project-title">{project.title}</h1>
             {project.createdAt && (
               <div className="project-page__project-date">
-                <span><FontAwesomeIcon icon={faCalendar} color="var(--color-primary)" /> {formatDate(project.createdAt)}</span>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    color="var(--color-primary)"
+                  />{" "}
+                  {formatDate(project.createdAt)}
+                </span>
               </div>
             )}
           </div>
-         
+
           {/* Technologies */}
           <div className="project-page__technologies-section">
-          
             <div className="project-page__tech-list">
               {project.technologies.map((tech, index) => (
                 <Tag key={index} tech={tech} />
@@ -280,12 +297,15 @@ const ProjectPage = () => {
 
           {/* Project Description */}
           <div className="project-page__description-section">
-            <h2 className="project-page__description-title">
-              About the Project
-            </h2>
-            <p className="project-page__description-text">
-              {project.description}
-            </p>
+            <div data-color-mode="auto">
+              <MDEditor.Markdown
+                source={project.markdownDescription || ""}
+                style={{
+                  backgroundColor: theme.bodyColor,
+                  color: theme.textColor
+                }}
+              />
+            </div>
           </div>
 
           <div className="project-page__project-links">

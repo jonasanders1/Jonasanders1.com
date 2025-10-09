@@ -10,6 +10,12 @@
   --color-button-text-light: #ffffff;
   --color-tag-bg-light: #e6e6e6;
 
+  /** MARKDOWN COLORS  **/
+  --md-code-bg-light: #ffffff;
+  --md-code-border-light: rgb(190, 190, 190);
+
+  /** /MARKDOWN COLORS  **/
+
   /* Dark theme colors */
   --color-body-dark: #1e1e1e;
   --color-container-dark: #2e2e2e;
@@ -20,6 +26,9 @@
   --color-button-dark: #bb86fc;
   --color-button-text-dark: #1e1e1e;
   --color-tag-bg-dark: #515151;
+  --md-code-bg-dark: #121212;
+  --md-code-border-dark: #2f2f2f;
+
   /* Active theme colors (defaults to light) */
   --color-body: var(--color-body-light);
   --color-container: var(--color-container-light);
@@ -30,6 +39,8 @@
   --color-button: var(--color-button-light);
   --color-button-text: var(--color-button-text-light);
   --color-tag-bg: var(--color-tag-bg-light);
+  --md-code-bg: var(--md-code-bg-light);
+  --md-code-border: var(--md-code-border-light);
   /* Additional UI colors */
   --color-success: #4caf50;
   --color-error: #f44336;
@@ -53,6 +64,8 @@
   --color-button-text: var(--color-button-text-dark);
   --color-border: var(--color-border-dark);
   --color-tag-bg: var(--color-tag-bg-dark);
+  --md-code-bg: var(--md-code-bg-dark);
+  --md-code-border: var(--md-code-border-dark);
 }
 
 /* Base styles for common elements */
@@ -60,7 +73,6 @@ body,
 html {
   background-color: var(--color-body);
   color: var(--color-text);
-  
 }
 
 /* Typography */

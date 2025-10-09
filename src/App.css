@@ -74,9 +74,11 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--body-color);
 }
 
 body {
+  background-color: var(--body-color);
   color: var(--color-text);
   min-height: 100vh; /* This ensures minimum full viewport height */
   font-family: var(--body-font);
@@ -97,11 +99,11 @@ h3 {
   font-weight: var(--font-semi-bold);
 }
 
-ul {
+nav ul {
   list-style: none;
 }
 
-a {
+nav ul a {
   text-decoration: none;
 }
 
@@ -113,6 +115,41 @@ button {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Overriding Markdown */
+.wmde-markdown .code-highlight {
+  background-color: var(--md-code-bg);
+  border: 1px solid var(--md-code-border);
+}
+
+/* Tables */
+.wmde-markdown th,
+.wmde-markdown td {
+  border: 1px solid var(--md-table-border);
+
+  background-color: var(--md-code-bg);
+  color: var(--container-color);
+}
+.wmde-markdown > a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.wmde-markdown thead th {
+  background-color: var(--color-body);
+  color: var(--color-title);
+}
+.wmde-markdown :not(pre) > code {
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+  color: var(--color-primary);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.9em;
+}
+ul {
+  list-style: initial;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
