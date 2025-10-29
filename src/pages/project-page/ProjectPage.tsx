@@ -302,7 +302,7 @@ const ProjectPage = () => {
                 source={project.markdownDescription || ""}
                 style={{
                   backgroundColor: theme.bodyColor,
-                  color: theme.textColor
+                  color: theme.textColor,
                 }}
               />
             </div>
