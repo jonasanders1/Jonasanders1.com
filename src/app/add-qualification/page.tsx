@@ -25,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { saveQualification } from "@/lib/qualifications";
+import type { Qualification } from "@/lib/types";
 
 const qualificationSchema = z.object({
   type: z.enum(["education", "experience"], {
@@ -75,7 +76,7 @@ export default function AddQualificationPage() {
     setIsSubmitting(true);
 
     try {
-      await saveQualification(data);
+      await saveQualification(data as Omit<Qualification, "id" | "createdAt">);
 
       toast({
         title: "Success",
