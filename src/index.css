@@ -1,0 +1,701 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cream/Orange Light Theme */
+    --background: 36 33% 97%;
+    --foreground: 0 0% 12%;
+
+    --card: 36 40% 98%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 36 40% 98%;
+    --popover-foreground: 0 0% 12%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 36 20% 92%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 36 15% 90%;
+    --muted-foreground: 0 0% 30%;
+
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 36 20% 88%;
+    --input: 36 20% 88%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Header height */
+    --header-height: 3rem;
+
+    /* Z-index */
+    --z-fixed: 100;
+
+    /* Fonts */
+    --font-medium: 500;
+    --small-font-size: 0.875rem;
+
+    /* Custom colors */
+    --cream: 36 33% 97%;
+    --cream-dark: 36 25% 94%;
+    --orange: 24 95% 53%;
+    --orange-light: 24 100% 95%;
+    --charcoal: 0 0% 12%;
+    --charcoal-light: 0 0% 25%;
+
+    /* Sidebar - keeping for compatibility */
+    --sidebar-background: 36 33% 97%;
+    --sidebar-foreground: 0 0% 25%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 36 20% 92%;
+    --sidebar-accent-foreground: 0 0% 12%;
+    --sidebar-border: 36 20% 88%;
+    --sidebar-ring: 24 95% 53%;
+  }
+
+  .dark {
+    /* Dark Charcoal Theme */
+    --background: 0 0% 11%;
+    --foreground: 36 20% 95%;
+
+    --card: 0 0% 14%;
+    --card-foreground: 36 20% 95%;
+
+    --popover: 0 0% 14%;
+    --popover-foreground: 36 20% 95%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 36 20% 95%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 36 10% 65%;
+
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 36 20% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 24 95% 53%;
+
+    --cream: 0 0% 11%;
+    --cream-dark: 0 0% 14%;
+    --charcoal: 36 20% 95%;
+    --charcoal-light: 36 15% 75%;
+
+    --sidebar-background: 0 0% 11%;
+    --sidebar-foreground: 36 20% 95%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 36 20% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 24 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-semibold text-center mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-muted-foreground text-center max-w-2xl mx-auto mb-12;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent;
+  }
+
+  /* Timeline styles */
+  .timeline-line {
+    @apply absolute left-0 md:left-1/2 w-0.5 h-full bg-border transform md:-translate-x-1/2;
+  }
+
+  .timeline-dot {
+    @apply absolute w-4 h-4 bg-primary rounded-full border-4 border-background left-0 md:left-1/2 transform -translate-x-1/2;
+  }
+}
+
+/* Header Styles */
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  background-color: hsl(var(--background) / 0.95);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+
+.nav__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  height: calc(var(--header-height) + 1.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+/* Desktop Navigation */
+.nav__list--desktop {
+  display: flex;
+  column-gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__list--desktop .nav__link {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0.5rem 0;
+}
+
+.nav__list--desktop .nav__link:hover,
+.nav__list--desktop .nav__link.active-link {
+  color: hsl(var(--primary));
+}
+
+.nav__toggle {
+  font-weight: var(--font-medium);
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: hsl(var(--foreground));
+  transition: color 0.3s;
+}
+
+.nav__toggle:hover {
+  color: hsl(var(--primary));
+}
+
+.nav__toggle-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile Navigation Menu */
+.nav__menu {
+  display: none;
+}
+
+.nav__list {
+  display: flex;
+  column-gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav__link:hover,
+.nav__link.active-link {
+  color: hsl(var(--primary));
+}
+
+.nav__icon {
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.nav__close,
+.nav__icon,
+.nav__toggle {
+  display: none;
+}
+
+/* Change Background Header */
+.scroll-header {
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Theme Toggle Styles */
+.toggle-theme-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.toggle-theme-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-theme-text {
+  font-size: var(--small-font-size);
+}
+
+/* ===== Mobile Styles ===== */
+@media screen and (max-width: 768px) {
+  /* Hide desktop nav on mobile */
+  .nav__list--desktop {
+    display: none;
+  }
+
+  .header {
+    top: initial;
+    bottom: 0;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+  }
+
+  .nav__menu {
+    position: fixed;
+    bottom: -300%;
+    left: 0;
+    width: 100%;
+    padding: 2rem 1.5rem 4rem;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem 1.5rem 0 0;
+    transition: 0.3s;
+    background-color: hsl(var(--background));
+    display: block;
+    z-index: calc(var(--z-fixed) + 5);
+  }
+
+  /* Show-menu */
+  .show-menu {
+    bottom: 0;
+  }
+
+  .nav__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .nav__icon {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .nav__close {
+    position: absolute;
+    right: 1.3rem;
+    bottom: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    color: hsl(var(--foreground));
+    transition: color 0.3s;
+  }
+
+  .nav__close:hover {
+    color: hsl(var(--primary));
+  }
+
+  .nav__toggle {
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav__icon,
+  .nav__close,
+  .nav__toggle {
+    display: block;
+  }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+  .nav__menu {
+    padding: 2rem 0.25rem 4rem;
+  }
+  .nav__list {
+    column-gap: 0;
+  }
+}
+
+/* Smooth animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+/* Markdown Styles - Custom Overrides */
+.wmde-markdown,
+.wmde-markdown-var,
+.wmde-markdown-var > div,
+[data-color-mode] .wmde-markdown,
+[data-color-mode] .wmde-markdown-var {
+  background-color: transparent !important;
+  color: hsl(var(--foreground));
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+/* Override all background colors from markdown editor */
+.wmde-markdown *,
+.wmde-markdown-var *,
+[data-color-mode] .wmde-markdown *,
+[data-color-mode] .wmde-markdown-var * {
+  background-color: transparent !important;
+}
+
+/* Restore backgrounds for specific elements that need them */
+.wmde-markdown pre,
+.wmde-markdown :not(pre) > code,
+.wmde-markdown blockquote,
+.wmde-markdown thead th,
+.wmde-markdown tbody tr:nth-child(even) {
+  background-color: hsl(var(--muted)) !important;
+}
+.wmde-markdown a.anchor {
+  display: none;
+}
+/* Headings */
+.wmde-markdown h1,
+.wmde-markdown h2,
+.wmde-markdown h3,
+.wmde-markdown h4,
+.wmde-markdown h5,
+.wmde-markdown h6 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.wmde-markdown h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px solid hsl(var(--border));
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.wmde-markdown h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 0.5rem;
+}
+
+.wmde-markdown h3 {
+  font-size: 1.5rem;
+}
+
+.wmde-markdown h4 {
+  font-size: 1.25rem;
+}
+
+.wmde-markdown h5 {
+  font-size: 1.125rem;
+}
+
+.wmde-markdown h6 {
+  font-size: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Paragraphs */
+.wmde-markdown p {
+  margin-bottom: 1.25rem;
+  color: hsl(var(--foreground));
+}
+
+/* Links */
+.wmde-markdown a {
+  color: hsl(var(--primary)) !important;
+  text-decoration: none;
+  border-bottom: 1px solid hsl(var(--primary) / 0.3) !important;
+  transition: all 0.2s;
+}
+
+.wmde-markdown a:hover {
+  color: hsl(var(--primary));
+}
+
+/* Lists */
+.wmde-markdown ul,
+.wmde-markdown ol {
+  margin: 1.25rem 0;
+  padding-left: 2rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.wmde-markdown li {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+}
+
+.wmde-markdown ul {
+  list-style-type: disc;
+}
+.wmde-markdown p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.5;
+}
+
+.wmde-markdown ol {
+  list-style-type: decimal;
+}
+
+.wmde-markdown li > p {
+  margin-bottom: 0.5rem;
+}
+
+/* Code blocks */
+.wmde-markdown pre {
+  background-color: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.wmde-markdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: hsl(var(--foreground));
+}
+
+/* Inline code */
+.wmde-markdown :not(pre) > code {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--primary));
+  border-radius: 0.375rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9em;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+}
+
+/* Blockquotes */
+.wmde-markdown blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  background: hsl(var(--muted) / 0.3);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+}
+
+/* Tables */
+.wmde-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.wmde-markdown th,
+.wmde-markdown td {
+  border: 1px solid hsl(var(--border));
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.wmde-markdown thead th {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+.wmde-markdown tbody tr {
+  background-color: hsl(var(--background));
+}
+
+.wmde-markdown tbody tr:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.3);
+}
+
+/* Horizontal rules */
+.wmde-markdown hr {
+  border: none;
+  border-top: 2px solid hsl(var(--border));
+  margin: 2rem 0;
+}
+
+/* Images */
+.wmde-markdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  border: 1px solid hsl(var(--border));
+}
+
+/* Strong and emphasis */
+.wmde-markdown strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.wmde-markdown em {
+  font-style: italic;
+  color: hsl(var(--foreground));
+}
+
+/* Task lists */
+.wmde-markdown input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: hsl(var(--primary));
+}
+
+/* Dark mode specific adjustments */
+.dark .wmde-markdown,
+.dark .wmde-markdown-var,
+.dark [data-color-mode] .wmde-markdown,
+.dark [data-color-mode] .wmde-markdown-var {
+  background-color: transparent !important;
+}
+
+.dark .wmde-markdown pre {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.dark .wmde-markdown :not(pre) > code {
+  background: hsl(var(--muted)) !important;
+  border-color: hsl(var(--border));
+}
+
+.dark .wmde-markdown blockquote {
+  background: hsl(var(--muted) / 0.2) !important;
+}

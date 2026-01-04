@@ -1,10 +1,25 @@
-import { useContext } from "react";
-import { ThemeContext, ThemeContextType } from "../contexts/ThemeContext";
+'use client';
 
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
+import { useTheme as useNextTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+
+export const useTheme = () => {
+  const { theme, setTheme, systemTheme } = useNextTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const themeName = theme === 'system' ? (systemTheme || 'light') : (theme || 'light');
+  
+  const toggleTheme = () => {
+    setTheme(themeName === 'light' ? 'dark' : 'light');
+  };
+
+  return { 
+    themeName: (mounted ? themeName : 'light') as 'light' | 'dark', 
+    toggleTheme,
+    mounted 
+  };
 };
